@@ -3,6 +3,7 @@ package com.codeacademy.eshop.product.repository;
 import com.codeacademy.eshop.product.exception.ProductNotFoundException;
 import com.codeacademy.eshop.product.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * This class is responsible for interaction with our database
+ */
 @Repository
 public class ProductRepository  {
 
@@ -33,9 +37,11 @@ public class ProductRepository  {
     }
 
     public Product findById(long id) {
-        Product p = jdbcTemplate.queryForObject(SELECT_PRODUCT_BY_ID, new ProductRowMapper(), id);
-        if (p == null) throw new ProductNotFoundException();
-        return p;
+        try {
+            return jdbcTemplate.queryForObject(SELECT_PRODUCT_BY_ID, new ProductRowMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ProductNotFoundException();
+        }
     }
 
     public void save(Product product) {

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * This class is responsible for our business logic
+ */
 @Service
 public class ProductService {
 

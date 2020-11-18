@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This class is responsible for mapping our request, validating it, interacting with model
+ */
 @Controller
 @RequestMapping("/product")
 public class ProductsController {

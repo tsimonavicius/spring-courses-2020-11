@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * This object is required to represent our database object
+ */
 @Getter
 @Setter
 public class Product {
