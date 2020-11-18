@@ -1,7 +1,10 @@
 package com.codeacademy.eshop.product.controller;
 
+import com.codeacademy.eshop.product.repository.ProductRepository;
 import com.codeacademy.eshop.product.exception.ProductNotFoundException;
 import com.codeacademy.eshop.product.model.Product;
+import com.codeacademy.eshop.product.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,22 @@ import java.util.List;
 public class ProductsController {
 
     private List<Product> products = new ArrayList<>();
+
+    private ProductService productService;
+
+    @Autowired
+    public ProductsController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping("/test")
+    public String testDbQueries(Model model) {
+        List<String> pNames = productService.getProductNames();
+        Product p1 = productService.getProductByIdJdbcTemplate(1);
+        Product p = productService.getProductByIdPreparedStatement(1);
+        int numOfKremuk = productService.countOfProductsByName("Kremukas");
+        return "product/product-list";
+    }
 
     @GetMapping
     public String getAllProducts(Model model) {
