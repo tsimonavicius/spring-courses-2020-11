@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Produktų sąrašas</title>
+    <style>
+        body {
+            background-color: darkgrey;
+        }
+    </style>
 </head>
 <body>
-<th:block th:if="${products.isEmpty()}">
+<th:block th:if="${products.empty}">
     <p>Jūs neturite pridėtų produktų!</p>
 </th:block>
 
-<th:block th:if="${!products.isEmpty()}">
+<th:block th:if="${not products.empty}">
     <table>
         <tr>
             <th>Pavadinimas</th>
@@ -17,12 +22,12 @@
             <th>Kaina</th>
         </tr>
         <tr th:each="product : ${products}">
-            <td th:text="${product.getName()}" />
-            <td th:text="${product.getInStock()}" />
-            <td th:text="${product.getPrice()}" />
-            <td><a th:href="@{/product/edit-name/{id}(id=${product.getId()})}">Koreguoti pavadinimą</a></td>
-            <td><a th:href="@{/product/{id}(id=${product.getId()})}">Rodyti</a></td>
-            <td><a th:href="@{/product/delete/{id}(id=${product.getId()})}">Trinti</a></td>
+            <td th:text="${product.name}" />
+            <td th:text="${product.inStock}" />
+            <td th:text="${product.price}" />
+            <td><a th:href="@{/product/edit-name/{id}(id=${product.id})}">Koreguoti pavadinimą</a></td>
+            <td><a th:href="@{/product/{id}(id=${product.id})}">Rodyti</a></td>
+            <td><a th:href="@{/product/delete/{id}(id=${product.id})}">Trinti</a></td>
         </tr>
     </table>
 </th:block>
