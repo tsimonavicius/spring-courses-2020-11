@@ -1,8 +1,8 @@
 package com.codeacademy.eshop.product.service;
 
 import com.codeacademy.eshop.product.model.Product;
+import com.codeacademy.eshop.product.repository.JdbcTemplateProductRepository;
 import com.codeacademy.eshop.product.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,9 +14,11 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    private JdbcTemplateProductRepository jdbcTemplateProductRepository;
     private ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(JdbcTemplateProductRepository jdbcTemplateProductRepository, ProductRepository productRepository) {
+        this.jdbcTemplateProductRepository = jdbcTemplateProductRepository;
         this.productRepository = productRepository;
     }
 
@@ -28,24 +30,25 @@ public class ProductService {
         alwaysVisibleProduct.setInStock(99999);
         alwaysVisibleProduct.setName("Sita privalo matyti visi!");
 
-        List<Product> products = productRepository.getAll();
+//        List<Product> products = jdbcTemplateProductRepository.getAll();
+        List<Product> products = productRepository.findAll();
         products.add(alwaysVisibleProduct);
         return products;
     }
 
     public Product getProductById(long id) {
-        return productRepository.findById(id);
+        return jdbcTemplateProductRepository.findById(id);
     }
 
     public void addProduct(Product product) {
-        productRepository.save(product);
+        jdbcTemplateProductRepository.save(product);
     }
 
     public void deleteById(long id) {
-        productRepository.deleteById(id);
+        jdbcTemplateProductRepository.deleteById(id);
     }
 
     public void updateProductName(Product productFromModel) {
-        productRepository.updateNameById(productFromModel.getName(), productFromModel.getId());
+        jdbcTemplateProductRepository.updateNameById(productFromModel.getName(), productFromModel.getId());
     }
 }
