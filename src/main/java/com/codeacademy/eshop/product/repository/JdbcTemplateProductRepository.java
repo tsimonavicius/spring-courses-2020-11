@@ -27,14 +27,6 @@ public class JdbcTemplateProductRepository {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public Product findById(long id) {
-        try {
-            return jdbcTemplate.queryForObject(SELECT_PRODUCT_BY_ID, new ProductRowMapper(), id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ProductNotFoundException();
-        }
-    }
-
     public void save(Product product) {
         MapSqlParameterSource namedParams = new MapSqlParameterSource();
         namedParams.addValue("name", product.getName());

@@ -1,5 +1,6 @@
 package com.codeacademy.eshop.product.service;
 
+import com.codeacademy.eshop.product.exception.ProductNotFoundException;
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.repository.JdbcTemplateProductRepository;
 import com.codeacademy.eshop.product.repository.ProductRepository;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This class is responsible for our business logic
@@ -37,7 +39,9 @@ public class ProductService {
     }
 
     public Product getProductById(long id) {
-        return jdbcTemplateProductRepository.findById(id);
+
+        return productRepository.findById(id)
+                .orElseThrow(ProductNotFoundException::new);
     }
 
     public void addProduct(Product product) {
