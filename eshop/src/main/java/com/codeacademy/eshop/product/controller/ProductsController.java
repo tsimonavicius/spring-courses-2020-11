@@ -2,7 +2,6 @@ package com.codeacademy.eshop.product.controller;
 
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,23 +44,20 @@ public class ProductsController {
     }
 
     @PostMapping("/edit-name")
-    public String updateProductName(@ModelAttribute("product") Product product, Model model) {
+    public String updateProductName(@ModelAttribute("product") Product product) {
         productService.updateProductName(product);
-        model.addAttribute("products", productService.getAllProducts());
-        return "product/product-list";
+        return "redirect:/product";
     }
 
     @PostMapping
-    public String addProduct(@ModelAttribute("product") Product product, Model model) {
+    public String addProduct(@ModelAttribute("product") Product product) {
         productService.addProduct(product);
-        model.addAttribute("products", productService.getAllProducts());
-        return "product/product-list";
+        return "forward:/product";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable long id, Model model) {
+    public String deleteProduct(@PathVariable long id) {
         productService.deleteById(id);
-        model.addAttribute("products", productService.getAllProducts());
-        return "product/product-list";
+        return "redirect:/product";
     }
 }
