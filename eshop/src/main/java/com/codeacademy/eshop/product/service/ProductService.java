@@ -51,8 +51,9 @@ public class ProductService {
                 .orElseThrow(ProductNotFoundException::new);
     }
 
-    public void addProduct(Product product) {
-        jdbcTemplateProductRepository.save(product);
+    public Product addProduct(Product product) {
+//        jdbcTemplateProductRepository.save(product);
+        return productRepository.save(product);
     }
 
     public void deleteById(long id) {

@@ -4,7 +4,11 @@ import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * This class is responsible for mapping our request, validating it, interacting with model
@@ -50,9 +54,12 @@ public class ProductsController {
     }
 
     @PostMapping
-    public String addProduct(@ModelAttribute("product") Product product) {
-        productService.addProduct(product);
-        return "forward:/product";
+    public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "product/new-product";
+        }
+        long savedProductId = productService.addProduct(product).getId();
+        return "redirect:/product/" + savedProductId;
     }
 
     @GetMapping("/delete/{id}")

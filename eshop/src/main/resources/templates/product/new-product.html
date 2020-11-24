@@ -1,18 +1,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Prideti nauja produktą</title>
+    <style>
+        .hasError {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+
+<ul th:if="${#fields.hasErrors('${product.*}')}">
+    <li th:each="error : ${#fields.errors('${product.*}')}" th:text="${error}"></li>
+</ul>
+
 <h3>Pridėti naują produktą</h3>
     <form th:action="@{/product}" method="POST" th:object="${product}">
         <label>Pavadinimas:</label>
-        <input type="text" th:field="*{name}" required /><br/>
+        <input type="text" th:field="*{name}" /><br/>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="hasError"></span><br />
         <label>Likęs kiekis:</label>
-        <input type="number" th:field="*{inStock}" required /><br/>
+        <input type="number" th:field="*{inStock}" /><br/>
+        <span th:if="${#fields.hasErrors('inStock')}" th:errors="*{inStock}" class="hasError"></span><br />
         <label>Kaina:</label>
-        <input type="number" th:field="*{price}" required /><br/>
+        <input type="number" th:field="*{price}" /><br/>
+        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="hasError"></span><br />
         <label>Aprašymas:</label>
-        <textarea th:field="*{description}" required></textarea><br/>
+        <textarea th:field="*{description}"></textarea><br/>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="hasError"></span><br />
         <input type="submit" value="Saugoti"/>
     </form>
 </body>
