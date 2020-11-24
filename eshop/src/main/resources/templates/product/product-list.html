@@ -10,6 +10,7 @@
     </style>
 </head>
 <body>
+<p th:text="#{hello}"></p>
 <th:block th:if="${products.empty}">
     <p>Jūs neturite pridėtų produktų!</p>
 </th:block>
@@ -17,9 +18,9 @@
 <th:block th:if="${not products.empty}">
     <table>
         <tr>
-            <th>Pavadinimas</th>
-            <th>Kiekis</th>
-            <th>Kaina</th>
+            <th th:text="#{product.table.name}"></th>
+            <th th:text="#{product.table.quantity}"></th>
+            <th th:text="#{product.table.price}"></th>
         </tr>
         <tr th:each="product : ${products}">
             <td th:text="${product.name}" />
