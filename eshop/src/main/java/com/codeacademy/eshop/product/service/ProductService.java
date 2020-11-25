@@ -63,7 +63,7 @@ public class ProductService {
 
     @Transactional
     public void updateProductName(Product productFromModel) {
-        productRepository.updateNameById(productFromModel.getId(), productFromModel.getName());
-//        jdbcTemplateProductRepository.updateNameById(productFromModel.getName(), productFromModel.getId());
+        Product product = productRepository.getOne(productFromModel.getId());
+        product.setName(productFromModel.getName());
     }
 }
