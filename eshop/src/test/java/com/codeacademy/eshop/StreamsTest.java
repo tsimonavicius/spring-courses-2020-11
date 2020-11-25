@@ -38,19 +38,23 @@ public class StreamsTest {
     @Test
     public void testStreams() {
         List<MobilePhone> phones = List.of(
-                new MobilePhone("Iphone 12", new BigDecimal("1000.50")),
-                new MobilePhone("Samsung S10", new BigDecimal("300.99")),
-                new MobilePhone("Samsung S20", new BigDecimal("999.99")));
+                new MobilePhone("Iphone 12", 1000.50),
+                new MobilePhone("Samsung S10", 300.99),
+                new MobilePhone("Samsung S20", 999.99));
 
         BigDecimal sum = BigDecimal.ZERO;
 
         for (MobilePhone phone : phones) {
-            BigDecimal price = extractFromObjectAndLog(phone, object -> object.getPrice());
-
-            sum = addPrice(sum, price);
+//            BigDecimal price = phone.getPrice();
+//            sum = addPrice(sum, price);
         }
 
-        System.out.println(sum);
+        System.out.println("For loop: " + sum);
+
+        System.out.println("Streams: " + phones.stream() // source - phone
+                .mapToDouble(MobilePhone::getPrice) // intermediate operation 0-...
+                .sum());
+//                .reduce(BigDecimal.ZERO, (initialValue, price) -> initialValue.add(price))); // terminal operation
 
         List<String> aaa = new ArrayList<>();
     }
@@ -76,20 +80,20 @@ public class StreamsTest {
 
     }
 
-    static class FunkcijaSuMobilePhone implements Funkcija<MobilePhone> {
-
-        @Override
-        public BigDecimal iskviesk(MobilePhone objektas) {
-            return objektas.getPrice();
-        }
-    }
+//    static class FunkcijaSuMobilePhone implements Funkcija<MobilePhone> {
+//
+//        @Override
+//        public BigDecimal iskviesk(MobilePhone objektas) {
+//            return objektas.getPrice();
+//        }
+//    }
 
     @Getter
     private static class MobilePhone {
         private String brand;
-        private BigDecimal price;
+        private double price;
 
-        public MobilePhone(String brand, BigDecimal price) {
+        public MobilePhone(String brand, double price) {
             this.brand = brand;
             this.price = price;
         }
