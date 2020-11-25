@@ -2,6 +2,7 @@ package com.codeacademy.eshop;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
@@ -88,14 +90,15 @@ public class StreamsTest {
 
     private void findSamsungWithStreams(List<MobilePhone> phones) {
 
-        String brangiausiasSamsungas = phones.stream()
+        List<MobilePhone> samsungai = phones.stream()
                 .filter(MobilePhone::isSamsung)
-                .sorted(comparing(MobilePhone::getPrice).reversed())
-                .findFirst()
-                .get()
-                .getModel();
+                .collect(Collectors.toList());
+//                .sorted(comparing(MobilePhone::getPrice).reversed())
+//                .findFirst()
+//                .get()
+//                .getModel();
 
-        System.out.println(brangiausiasSamsungas);
+        System.out.println(samsungai);
 
     }
 
@@ -138,6 +141,7 @@ public class StreamsTest {
 
     @Getter
     @AllArgsConstructor
+    @ToString
     private static class MobilePhone {
         private String brand;
         private String model;
