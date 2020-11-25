@@ -2,10 +2,11 @@ package com.codeacademy.eshop.product.controller;
 
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,6 +22,12 @@ public class ProductsController {
 
     public ProductsController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        StringTrimmerEditor stringtrimmer = new StringTrimmerEditor(true);
+        binder.registerCustomEditor(String.class, stringtrimmer);
     }
 
     @GetMapping
@@ -55,6 +62,7 @@ public class ProductsController {
 
     @PostMapping
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
+        product.setName(product.getName().trim());
         if (bindingResult.hasErrors()) {
             return "product/new-product";
         }
