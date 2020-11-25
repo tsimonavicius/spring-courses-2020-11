@@ -9,6 +9,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
@@ -60,7 +61,9 @@ public class ProductService {
         jdbcTemplateProductRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateProductName(Product productFromModel) {
-        jdbcTemplateProductRepository.updateNameById(productFromModel.getName(), productFromModel.getId());
+        productRepository.updateNameById(productFromModel.getId(), productFromModel.getName());
+//        jdbcTemplateProductRepository.updateNameById(productFromModel.getName(), productFromModel.getId());
     }
 }
