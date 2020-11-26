@@ -6,18 +6,18 @@
 </head>
 <body>
 <p th:text="#{hello}"></p>
-<th:block th:if="${products.empty}">
+<th:block th:if="${productsPage.empty}">
     <p>Jūs neturite pridėtų produktų!</p>
 </th:block>
 
-<th:block th:if="${not products.empty}">
+<th:block th:if="${not productsPage.empty}">
     <table>
         <tr>
             <th th:text="#{product.table.name}"></th>
             <th th:text="#{product.table.quantity}"></th>
             <th th:text="#{product.table.price}"></th>
         </tr>
-        <tr th:each="product : ${products}">
+        <tr th:each="product : ${productsPage.content}">
             <td th:text="${product.name}" />
             <td th:text="${product.inStock}" />
             <td th:text="${product.price}" />
@@ -26,6 +26,13 @@
             <td><a th:href="@{/product/delete/{id}(id=${product.id})}">Trinti</a></td>
         </tr>
     </table>
+
+    <div>
+        <th:block th:each="pageNumber : ${#numbers.sequence(0, productsPage.totalPages - 1)}">
+            <a th:href="@{/product?page={pn}&size={size}(pn=${pageNumber}, size=${productsPage.size})}" th:text="${pageNumber + 1}"></a>
+        </th:block>
+    </div>
+
 </th:block>
     <a th:href="@{/product/new}">Kurti naują</a>
 </body>

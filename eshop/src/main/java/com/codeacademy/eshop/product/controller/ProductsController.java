@@ -28,11 +28,8 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(@PageableDefault(size = 7) Pageable pageable, Model model) {
-        Page<Product> productsPage = productService.getAllProducts(pageable);
-
-        model.addAttribute("products", productsPage.getContent());
-
+    public String getAllProducts(@PageableDefault(size = 5) Pageable pageable, Model model) {
+        model.addAttribute("productsPage", productService.getAllProducts(pageable));
         return "product/product-list";
     }
 
