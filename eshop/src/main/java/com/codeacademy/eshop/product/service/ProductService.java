@@ -4,16 +4,14 @@ import com.codeacademy.eshop.product.exception.ProductNotFoundException;
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.repository.JdbcTemplateProductRepository;
 import com.codeacademy.eshop.product.repository.ProductRepository;
-import com.codeacademy.eshop.util.Translator;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 /**
  * This class is responsible for our business logic
@@ -30,19 +28,20 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts() {
+    public Page<Product> getAllProducts(Integer page, Integer size) {
         // business logic goes here (in this class)!
         String currLang = LocaleContextHolder.getLocale().getDisplayName();
 
-        Product alwaysVisibleProduct = new Product();
-        alwaysVisibleProduct.setDescription("Visada matomas produktas");
-        alwaysVisibleProduct.setPrice(BigDecimal.valueOf(10000));
-        alwaysVisibleProduct.setInStock(99999);
-        alwaysVisibleProduct.setName(Translator.getMessage("product.language").concat(currLang));
+//        Product alwaysVisibleProduct = new Product();
+//        alwaysVisibleProduct.setDescription("Visada matomas produktas");
+//        alwaysVisibleProduct.setPrice(BigDecimal.valueOf(10000));
+//        alwaysVisibleProduct.setInStock(99999);
+//        alwaysVisibleProduct.setName(Translator.getMessage("product.language").concat(currLang));
 
 //        List<Product> products = jdbcTemplateProductRepository.getAll();
-        List<Product> products = productRepository.findAll();
-        products.add(alwaysVisibleProduct);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> products = productRepository.findAll(pageable);
+//        products.add(alwaysVisibleProduct);
         return products;
     }
 

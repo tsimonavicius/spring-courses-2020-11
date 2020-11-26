@@ -3,6 +3,7 @@ package com.codeacademy.eshop.product.controller;
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,9 +32,11 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size,  Model model) {
-        model.addAttribute("products", productService.getAllProducts());
-        System.out.println("Page: " + page + " ----- Size: " + size);
+    public String getAllProducts(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer size,  Model model) {
+        Page<Product> productsPage = productService.getAllProducts(page, size);
+
+        model.addAttribute("products", productsPage.getContent());
+
         return "product/product-list";
     }
 
