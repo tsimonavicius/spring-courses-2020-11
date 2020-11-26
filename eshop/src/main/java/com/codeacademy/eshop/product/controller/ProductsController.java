@@ -31,8 +31,9 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(Model model) {
+    public String getAllProducts(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size,  Model model) {
         model.addAttribute("products", productService.getAllProducts());
+        System.out.println("Page: " + page + " ----- Size: " + size);
         return "product/product-list";
     }
 
