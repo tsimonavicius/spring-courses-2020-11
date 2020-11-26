@@ -4,6 +4,7 @@ import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,8 +33,8 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer size,  Model model) {
-        Page<Product> productsPage = productService.getAllProducts(page, size);
+    public String getAllProducts(Pageable pageable, Model model) {
+        Page<Product> productsPage = productService.getAllProducts(pageable);
 
         model.addAttribute("products", productsPage.getContent());
 

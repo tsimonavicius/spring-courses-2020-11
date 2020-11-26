@@ -28,7 +28,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Page<Product> getAllProducts(Integer page, Integer size) {
+    public Page<Product> getAllProducts(Pageable pageable) {
         // business logic goes here (in this class)!
         String currLang = LocaleContextHolder.getLocale().getDisplayName();
 
@@ -39,7 +39,6 @@ public class ProductService {
 //        alwaysVisibleProduct.setName(Translator.getMessage("product.language").concat(currLang));
 
 //        List<Product> products = jdbcTemplateProductRepository.getAll();
-        Pageable pageable = PageRequest.of(page, size);
         Page<Product> products = productRepository.findAll(pageable);
 //        products.add(alwaysVisibleProduct);
         return products;
