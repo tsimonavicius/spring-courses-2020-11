@@ -27,12 +27,6 @@ public class ProductsController {
         this.productService = productService;
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        StringTrimmerEditor stringtrimmer = new StringTrimmerEditor(true);
-        binder.registerCustomEditor(String.class, stringtrimmer);
-    }
-
     @GetMapping
     public String getAllProducts(@PageableDefault(size = 7) Pageable pageable, Model model) {
         Page<Product> productsPage = productService.getAllProducts(pageable);
