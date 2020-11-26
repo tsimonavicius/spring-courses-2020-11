@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Produktų sąrašas</title>
+
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/css/style.css}" />
 </head>
 <body>
 <p th:text="#{hello}"></p>
@@ -29,7 +32,7 @@
 
     <div>
         <th:block th:each="pageNumber : ${#numbers.sequence(0, productsPage.totalPages - 1)}">
-            <a th:href="@{/product?page={pn}&size={size}(pn=${pageNumber}, size=${productsPage.size})}" th:text="${pageNumber + 1}"></a>
+            <a class="currentPage" th:href="@{/product?page={pn}&size={size}(pn=${pageNumber}, size=${productsPage.size})}" th:text="${pageNumber + 1}"></a>
         </th:block>
     </div>
 
