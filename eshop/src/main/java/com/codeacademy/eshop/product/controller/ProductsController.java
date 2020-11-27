@@ -59,7 +59,6 @@ public class ProductsController {
 
     @PostMapping
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
-        product.setName(product.getName().trim());
         if (bindingResult.hasErrors()) {
             return "product/new-product";
         }
