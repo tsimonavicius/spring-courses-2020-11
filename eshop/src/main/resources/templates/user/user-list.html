@@ -18,23 +18,17 @@
 <th:block th:if="${not usersPage.empty}">
     <table class="table">
         <tr>
-            <th>
-                <span>Slapyvardis</span>
-            </th>
-            <th>
-                <span>Tel. nr</span>
-            </th>
-            <th>
-                <span>Kaina</span>
-            </th>
-            <th></th>
+            <th>Slapyvardis</th>
+            <th>Tel. nr</th>
+            <th>Pasto kodas</th>
             <th></th>
             <th></th>
         </tr>
         <tr th:each="user : ${usersPage}">
             <td th:text="${user.username}" />
             <td th:text="${user.phone}" />
-            <td><a th:href="@{/user/{id}(id=${user.id})}">Rodyti</a></td>
+            <td th:text="${user.zip}" />
+            <td><a th:href="@{/user/{id}(id=${user.id})}"><button class="btn btn-bg bg-primary text-white">Profilis</button></a></td>
         </tr>
     </table>
 
@@ -49,6 +43,6 @@
     </div>
 
 </th:block>
-    <a th:href="@{/user/new}">Kurti naują</a>
+<a th:href="@{/user/new}"><button class="btn btn-bg bg-success text-white">Pridėti naują</button></a>
 </body>
 </html>

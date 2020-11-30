@@ -14,6 +14,9 @@ public class LithuanianPhoneValidator implements ConstraintValidator<LithuanianP
      */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (value == null) {
+            return true;
+        }
         if (value.length() == 9 && value.startsWith("86")) {
                 return areCharsDigits(value.substring(2));
         }
