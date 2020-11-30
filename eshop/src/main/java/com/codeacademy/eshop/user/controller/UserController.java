@@ -2,6 +2,7 @@ package com.codeacademy.eshop.user.controller;
 
 import com.codeacademy.eshop.user.model.User;
 import com.codeacademy.eshop.user.service.UserService;
+import com.codeacademy.eshop.user.service.validator.UserValidator;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
