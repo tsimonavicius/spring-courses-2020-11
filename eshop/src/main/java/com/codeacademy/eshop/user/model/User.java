@@ -1,6 +1,7 @@
 package com.codeacademy.eshop.user.model;
 
 import com.codeacademy.eshop.user.service.validator.LithuanianPhone;
+import com.codeacademy.eshop.user.service.validator.LithuanianZip;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +30,9 @@ public class User {
 
     @LithuanianPhone
     private String phone;
+
+    @LithuanianZip
+    private String zip;
 
     private String avatar;
 }

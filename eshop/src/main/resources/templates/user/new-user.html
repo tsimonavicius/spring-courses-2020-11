@@ -20,6 +20,9 @@
         <label>Teleforno nr:</label>
         <input type="text" th:field="*{phone}" /><br/>
         <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="hasError"></span><br />
+        <label>Pasto kodas:</label>
+        <input type="text" th:field="*{zip}" /><br/>
+        <span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}" class="hasError"></span><br />
         <label>Avataro URL:</label>
         <input type="text" th:field="*{avatar}" /><br/>
         <span th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="hasError"></span><br />
