@@ -1,11 +1,10 @@
 package com.codeacademy.eshop.user.model;
 
+import com.codeacademy.eshop.user.service.validator.LithuanianPhone;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -28,6 +27,7 @@ public class User {
     @NotBlank
     private String password;
 
+    @LithuanianPhone
     private String phone;
 
     private String avatar;
