@@ -7,7 +7,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-public class UserValidator implements Validator {
+public class UserExtraValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         return User.class.isAssignableFrom(clazz);
@@ -15,7 +15,7 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Username cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Username cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zip", "validation.zip.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "validation.phone.empty");
     }
 }

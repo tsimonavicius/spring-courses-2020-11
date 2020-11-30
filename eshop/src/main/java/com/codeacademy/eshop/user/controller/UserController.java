@@ -2,7 +2,7 @@ package com.codeacademy.eshop.user.controller;
 
 import com.codeacademy.eshop.user.model.User;
 import com.codeacademy.eshop.user.service.UserService;
-import com.codeacademy.eshop.user.service.validator.UserValidator;
+import com.codeacademy.eshop.user.service.validator.UserExtraValidator;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -17,9 +17,11 @@ import javax.validation.Valid;
 public class UserController {
 
     private UserService userService;
+    private UserExtraValidator userExtraValidator;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserExtraValidator userExtraValidator) {
         this.userService = userService;
+        this.userExtraValidator = userExtraValidator;
     }
 
     @GetMapping
@@ -48,4 +50,21 @@ public class UserController {
         model.addAttribute("user", userService.getUserById(id));
         return "user/user-profile";
     }
+
+    @GetMapping("/update/{id}")
+    public String getUpdateUserForm(Model model, @PathVariable long id) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "user/edit-user";
+    }
+
+    @PostMapping("/{id}")
+    public String updateUser(@PathVariable Long id, BindingResult bindingResult, @ModelAttribute("user") User user) {
+        userExtraValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "user/edit-user";
+        }
+        userService.updateUser(id, user);
+        return "redirect:/user/" + id;
+    }
+
 }
