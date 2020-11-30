@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Prideti nauja vartotoja</title>
+    <style>
+        .hasError {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Pridėti naują vartotoja</h3>
+    <form th:action="@{/user}" method="POST" th:object="${user}">
+        <label>Slapyvardis:</label>
+        <input type="text" th:field="*{username}" /><br/>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="hasError"></span><br />
+        <label>Slaptazodis:</label>
+        <input type="password" th:field="*{password}" /><br/>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="hasError"></span><br />
+        <label>Teleforno nr:</label>
+        <input type="text" th:field="*{phone}" /><br/>
+        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="hasError"></span><br />
+        <label>Avataro URL:</label>
+        <input type="text" th:field="*{avatar}" /><br/>
+        <span th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="hasError"></span><br />
+        <input type="submit" value="Saugoti"/>
+    </form>
+</body>
+</html>
