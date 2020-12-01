@@ -5,11 +5,14 @@
     <title th:text="${'Produktas: ' + product.getName()}">Produktas </title>
 </head>
 <body>
+<div th:replace="fragments/main :: menu"></div>
+<div th:replace="fragments/main :: toolbar (url='/product', text='Atgal į produktų sąrašą')"></div>
     <p th:text="'Produkto pavadinimas: ' + ${product.getName()}" />
     <p th:text="'Likutis: ' + ${product.getInStock()}" />
     <p th:text="'Kaina: ' + ${product.getPrice()}" />
     <label>Aprašymas:</label>
     <br />
     <textarea th:text="${product.getDescription()}" readonly/>
+<div th:replace="fragments/main :: footer"></div>
 </body>
 </html>

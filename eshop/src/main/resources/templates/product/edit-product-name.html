@@ -3,6 +3,8 @@
     <title>Koreguoti produkto pavadinimą</title>
 </head>
 <body>
+<div th:replace="fragments/main :: menu"></div>
+<div th:replace="fragments/main :: toolbar (url='/product', text='Atgal į produktų sąrašą')"></div>
 <h3>Koreguoti produkto pavadinimą</h3>
     <form th:action="@{/product/edit-name}" method="POST" th:object="${product}">
         <input type="hidden" th:field="*{id}" th:value="*{id}" >
@@ -10,5 +12,6 @@
         <input type="text" th:field="*{name}" th:value="*{name}" required /><br/>
         <input type="submit" value="Saugoti"/>
     </form>
+<div th:replace="fragments/main :: footer"></div>
 </body>
 </html>

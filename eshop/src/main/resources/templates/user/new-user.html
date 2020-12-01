@@ -8,6 +8,8 @@
     </style>
 </head>
 <body>
+<div th:replace="fragments/main :: menu"></div>
+<div th:replace="fragments/main :: toolbar (url='/user', text='Atgal į vartotojų sąrašą')"></div>
 
 <h3>Pridėti naują vartotoja</h3>
     <form th:action="@{/user}" method="POST" th:object="${user}">
@@ -28,5 +30,6 @@
         <span th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="hasError"></span><br />
         <input type="submit" value="Saugoti"/>
     </form>
+<div th:replace="fragments/main :: footer"></div>
 </body>
 </html>

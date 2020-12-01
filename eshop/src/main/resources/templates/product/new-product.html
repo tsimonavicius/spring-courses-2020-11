@@ -8,7 +8,8 @@
     </style>
 </head>
 <body>
-
+<div th:replace="fragments/main :: menu"></div>
+<div th:replace="fragments/main :: toolbar (url='/product', text='Atgal į produktų sąrašą')"></div>
 <ul th:if="${#fields.hasErrors('${product.*}')}">
     <li th:each="error : ${#fields.errors('${product.*}')}" th:text="${error}"></li>
 </ul>
@@ -29,5 +30,6 @@
         <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="hasError"></span><br />
         <input type="submit" value="Saugoti"/>
     </form>
+<div th:replace="fragments/main :: footer"></div>
 </body>
 </html>
