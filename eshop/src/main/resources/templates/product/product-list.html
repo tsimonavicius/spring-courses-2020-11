@@ -56,15 +56,9 @@
             </tr>
         </table>
 
-        <div>
-            <th:block th:each="pageNumber : ${#numbers.sequence(0, productsPage.totalPages - 1)}">
-                <a th:class="${pageNumber == productsPage.number ? 'currentPage' : ''}"
-                   th:with="order=${productsPage.sort.iterator().hasNext() ? productsPage.sort.iterator().next() : null}"
-                   th:href="@{/product(page=${pageNumber}, size=${productsPage.size}, sort=${order != null ? (order.property + ',' + order.direction) : ''})}"
-                   th:text="${pageNumber + 1}"></a>
-            </th:block>
-            <span th:text="'Viso: ' + ${productsPage.totalElements}"></span>
-        </div>
+    <div th:include="fragments/main :: pagination" th:object="${productsPage}">
+<!--    fragmentas renderincis cia    -->
+    </div>
 
     </th:block>
 </div>

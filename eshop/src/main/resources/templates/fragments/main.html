@@ -10,10 +10,10 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/product' ? 'active':''}">
         <a class="nav-link" href="/product">Produktai</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}">
         <a class="nav-link" href="/user">Vartotojai</a>
       </li>
     </ul>
@@ -25,6 +25,16 @@
 
 <div th:fragment="toolbar (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}" class="container d-flex justify-content-end">
     <a th:href="*{url}"><button class="btn btn-bg bg-success text-white" th:text="*{text}"></button></a>
+</div>
+
+ <div th:fragment="pagination">
+    <th:block th:each="pageNumber : *{#numbers.sequence(0, totalPages - 1)}">
+        <a th:class="${pageNumber == number ? 'currentPage' : ''}"
+           th:with="order=*{sort.iterator().hasNext() ? sort.iterator().next() : null}"
+           th:href="@{/product(page=${pageNumber}, size=*{size}, sort=${order != null ? (order.property + ',' + order.direction) : ''})}"
+           th:text="${pageNumber + 1}"></a>
+    </th:block>
+    <span th:text="'Viso: ' + *{totalElements}"></span>
 </div>
 
 <footer th:fragment="footer" class="footer mt-auto py-3" style="position: absolute; bottom: 0;">

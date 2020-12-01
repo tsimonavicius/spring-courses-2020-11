@@ -5,7 +5,7 @@
     <title>Vartotoju sąrašas</title>
 
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}" />
+          th:href="@{/static/css/global.css}" />
     <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 <body>
@@ -34,16 +34,7 @@
             </tr>
         </table>
 
-        <div>
-            <th:block th:each="pageNumber : ${#numbers.sequence(0, usersPage.totalPages - 1)}">
-                <a th:class="${pageNumber == usersPage.number ? 'currentPage' : ''}"
-                   th:with="order=${usersPage.sort.iterator().hasNext() ? usersPage.sort.iterator().next() : null}"
-                   th:href="@{/user(page=${pageNumber}, size=${usersPage.size})}"
-                   th:text="${pageNumber + 1}"></a>
-            </th:block>
-            <span th:text="'Viso: ' + ${usersPage.totalElements}"></span>
-        </div>
-
+    <div th:include="fragments/main :: pagination" th:object="${usersPage}"></div>
     </th:block>
     <div th:replace="fragments/main :: footer"></div>
 </div>
