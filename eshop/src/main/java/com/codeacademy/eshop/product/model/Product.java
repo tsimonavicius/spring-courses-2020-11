@@ -2,9 +2,13 @@ package com.codeacademy.eshop.product.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
@@ -12,6 +16,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "Products")
 public class Product {

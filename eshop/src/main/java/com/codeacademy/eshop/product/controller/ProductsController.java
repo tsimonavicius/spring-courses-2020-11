@@ -2,14 +2,12 @@ package com.codeacademy.eshop.product.controller;
 
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.data.domain.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +15,7 @@ import javax.validation.Valid;
 /**
  * This class is responsible for mapping our request, validating it, interacting with model
  */
+@Slf4j
 @Controller
 @RequestMapping("/product")
 public class ProductsController {
@@ -35,6 +34,8 @@ public class ProductsController {
 
     @GetMapping("/{id}")
     public String getSingleProduct(@PathVariable long id, Model model) {
+        log.info("getSingleProduct({})", id);
+
         model.addAttribute("product", productService.getProductById(id));
         return "product/single-product";
     }
@@ -59,9 +60,12 @@ public class ProductsController {
 
     @PostMapping
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
+        log.info("addProduct({})", product);
+
         if (bindingResult.hasErrors()) {
             return "product/new-product";
         }
+
         long savedProductId = productService.addProduct(product).getId();
         return "redirect:/product/" + savedProductId;
     }
