@@ -11,15 +11,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests((requests) -> requests.anyRequest().authenticated())
+                .authorizeRequests()
+                    .antMatchers("/h2/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
                     .permitAll()
                     .loginPage("/prisijungimas")
-                    .loginProcessingUrl("/prisijungimas-submit")
+                    .loginProcessingUrl("/prisijungimas")
                     .usernameParameter("user")
                     .passwordParameter("pass")
+                    .defaultSuccessUrl("/product")
                     .failureUrl("/prisijungimas?error")
                     .and()
                 .httpBasic();
+
+        http.csrf().ignoringAntMatchers("/h2/**");
+        http.headers().frameOptions().sameOrigin();
     }
 }
