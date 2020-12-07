@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pirkiniu krepselis</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/main :: menu"></div>
+<div class="container">
+    <th:block th:if="${cart.empty}">
+        <p>Jūsų pirkiniu krepselis yra tuscias!</p>
+    </th:block>
+
+    <th:block th:if="${not cart.empty}">
+        <table class="table">
+            <tr>
+                <th>Produktas</th>
+                <th>Kaina</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="product : ${cart}">
+                <td th:text="${product.name}" />
+                <td th:text="${product.price}" />
+            </tr>
+        </table>
+        <p>Viso kaina: <span th:text="${totalPrice}"></span></p>
+        <p><a th:href="@{/cart/checkout}">Apmokejimas --></a></p>
+    </th:block>
+</div>
+<div th:replace="fragments/main :: footer"></div>
+</body>
+</html>

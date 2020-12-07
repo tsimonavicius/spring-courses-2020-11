@@ -45,6 +45,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             <tr th:each="product : ${productsPage}">
                 <td th:text="${product.name}" />
@@ -53,6 +54,7 @@
                 <td><a th:href="@{/product/edit-name/{id}(id=${product.id})}">Koreguoti pavadinimą</a></td>
                 <td><a th:href="@{/product/{id}(id=${product.id})}">Rodyti</a></td>
                 <td><a th:href="@{/product/delete/{id}(id=${product.id})}">Trinti</a></td>
+                <td><a th:href="@{/cart/add/{id}(id=${product.id})}">Prideti i vezimeli</a></td>
             </tr>
         </table>
 
