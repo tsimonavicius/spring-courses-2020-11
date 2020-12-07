@@ -9,6 +9,8 @@
 <body>
 <div th:replace="fragments/main :: menu"></div>
 <div class="container">
+    <div th:if="${!cart.empty}" class="m-2" th:include="fragments/main :: toolbar (url='/cart/checkout', text='Apmokejimas')"></div>
+
     <th:block th:if="${cart.empty}">
         <p>Jūsų pirkiniu krepselis yra tuscias!</p>
     </th:block>
@@ -29,7 +31,6 @@
         <p>Viso PVM: <span th:text="*{totalVat}"></span></p>
         <p>Viso kaina su PVM: <span th:text="*{totalBrutto}"></span></p>
         </div>
-        <p><a th:href="@{/cart/checkout}">Apmokejimas --></a></p>
     </th:block>
 </div>
 <div th:replace="fragments/main :: footer"></div>
