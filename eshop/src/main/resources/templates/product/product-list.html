@@ -10,7 +10,9 @@
 <div th:replace="fragments/main :: menu"></div>
 <div class="container">
     <div th:replace="fragments/main :: toolbar (url='/product/new', text='Pridėti naują')"></div>
-    <p th:text="#{hello}"></p>
+    <th:block th:if="${cart != null}">
+        <p>Pridetu produktu i krepseli: <span th:text="${cart.size()}"></span></p>
+    </th:block>
     <th:block th:if="${productsPage.empty}">
         <p>Jūs neturite pridėtų produktų!</p>
     </th:block>
@@ -54,7 +56,7 @@
                 <td><a th:href="@{/product/edit-name/{id}(id=${product.id})}">Koreguoti pavadinimą</a></td>
                 <td><a th:href="@{/product/{id}(id=${product.id})}">Rodyti</a></td>
                 <td><a th:href="@{/product/delete/{id}(id=${product.id})}">Trinti</a></td>
-                <td><a th:href="@{/cart/add/{id}(id=${product.id})}">Prideti i vezimeli</a></td>
+                <td><a th:href="@{/cart/add/{id}(id=${product.id})}">Prideti i krepseli</a></td>
             </tr>
         </table>
 

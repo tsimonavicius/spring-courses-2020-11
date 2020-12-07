@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * This class is responsible for mapping our request, validating it, interacting with model
@@ -27,7 +29,8 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(@PageableDefault(size = 5) Pageable pageable, Model model) {
+    public String getAllProducts(@PageableDefault(size = 5) Pageable pageable, Model model, HttpSession httpSession) {
+        model.addAttribute("cart", httpSession.getAttribute("cart"));
         model.addAttribute("productsPage", productService.getAllProducts(pageable));
         return "product/product-list";
     }
