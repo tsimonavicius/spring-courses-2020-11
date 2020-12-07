@@ -18,15 +18,17 @@
             <tr>
                 <th>Produktas</th>
                 <th>Kaina</th>
-                <th></th>
-                <th></th>
             </tr>
             <tr th:each="product : ${cart}">
                 <td th:text="${product.name}" />
                 <td th:text="${product.price}" />
             </tr>
         </table>
-        <p>Viso kaina: <span th:text="${totalPrice}"></span></p>
+        <div th:object="${cartPrice}" class="right">
+        <p>Viso kaina be PVM: <span th:text="*{totalNetto}"></span></p>
+        <p>Viso PVM: <span th:text="*{totalVat}"></span></p>
+        <p>Viso kaina su PVM: <span th:text="*{totalBrutto}"></span></p>
+        </div>
         <p><a th:href="@{/cart/checkout}">Apmokejimas --></a></p>
     </th:block>
 </div>

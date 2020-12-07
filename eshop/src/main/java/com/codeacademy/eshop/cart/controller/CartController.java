@@ -5,7 +5,6 @@ import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -32,7 +31,7 @@ public class CartController {
 
     @GetMapping
     private String openCartList(@ModelAttribute("cart") List<Product> cart, Model model) {
-        model.addAttribute("totalPrice", cartService.countTotalPrice(cart));
+        model.addAttribute("cartPrice", cartService.countTotalPrice(cart));
         return "cart/cart-list";
     }
 
