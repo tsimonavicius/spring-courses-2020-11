@@ -1,4 +1,4 @@
-package com.codeacademy.eshop.cart.service;
+package com.codeacademy.eshop.cart.model;
 
 import lombok.Getter;
 import lombok.Setter;

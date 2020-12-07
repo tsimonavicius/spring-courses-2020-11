@@ -32,6 +32,7 @@ public class CartController {
     @GetMapping
     private String openCartList(@ModelAttribute("cart") List<Product> cart, Model model) {
         model.addAttribute("cartPrice", cartService.countTotalPrice(cart));
+        model.addAttribute("totalProductsInStore", productService.getTotalProductsInStore());
         return "cart/cart-list";
     }
 

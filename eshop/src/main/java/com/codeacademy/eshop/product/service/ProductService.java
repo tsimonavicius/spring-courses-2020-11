@@ -44,6 +44,10 @@ public class ProductService {
         return products;
     }
 
+    public int getTotalProductsInStore() {
+        return productRepository.findAll().size();
+    }
+
     public Product getProductById(long id) {
 
         return productRepository.findById(id)

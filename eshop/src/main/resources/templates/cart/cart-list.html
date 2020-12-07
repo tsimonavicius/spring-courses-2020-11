@@ -12,7 +12,7 @@
     <div th:if="${!cart.empty}" class="m-2" th:include="fragments/main :: toolbar (url='/cart/checkout', text='Apmokejimas')"></div>
 
     <th:block th:if="${cart.empty}">
-        <p>Jūsų pirkiniu krepselis yra tuscias!</p>
+        <p>Jūsų pirkiniu krepselis yra tuscias! Parduotuveje yra <span th:text="${totalProductsInStore}"></span> produktu! Nejaugi neissirenkat? :o </p>
     </th:block>
 
     <th:block th:if="${not cart.empty}">

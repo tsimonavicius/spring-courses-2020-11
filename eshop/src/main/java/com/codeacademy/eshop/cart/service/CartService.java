@@ -1,5 +1,6 @@
 package com.codeacademy.eshop.cart.service;
 
+import com.codeacademy.eshop.cart.model.CartPrice;
 import com.codeacademy.eshop.product.model.Product;
 import org.springframework.stereotype.Service;
 
