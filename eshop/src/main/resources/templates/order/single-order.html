@@ -8,25 +8,25 @@
 <div th:replace="fragments/main :: menu"></div>
 <div th:replace="fragments/main :: toolbar (url='/order', text='Atgal į uzsakymu sąrašą')"></div>
 
-<div class="container d-flex justify-content-center">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Uzsakymo numeris <span th:text="${order.id}"></span></h5>
-            <p class="card-text">Viso turim produktų: <span th:text="${order.products.size()}"></span> </p>
-        </div>
-        <ul class="list-group list-group-flush" th:each="product : ${order.products}">
-            <li class="list-group-item">Pavadinimas: <b><span th:text="${product.name}"></span></b></li>
-            <li class="list-group-item">Kaina: <b><span th:text="${product.price}"></span></b></li>
-        </ul>
-        <div class="card-body">
-            <div th:object="${price}" class="right mt-3">
-                <p>Viso kaina be PVM: <span th:text="*{totalNetto}"></span></p>
-                <p>Viso PVM: <span th:text="*{totalVat}"></span></p>
-                <p>Viso kaina su PVM: <span th:text="*{totalBrutto}"></span></p>
+<div class="container">
+    <h5 class="card-title">Uzsakymo numeris <span th:text="${order.id}"></span></h5>
+    <p class="card-text">Viso turim produktų: <span th:text="${order.products.size()}"></span> </p>
+
+    <div class="d-flex justify-content-between">
+        <div class="card" style="width: 18rem;" th:each="product : ${order.products}">
+            <div class="card-body">
+                <h5 class="card-title">Prekes pavadinimas <span th:text="${product.name}"></span></h5>
+                <p class="card-text">Kaina: <span th:text="${product.price}"></span> </p>
             </div>
-            <a th:href="@{/invoice}">Rodyti saskaitas</a>
         </div>
     </div>
+
+        <div th:object="${price}" class="right mt-3">
+            <p>Viso kaina be PVM: <span th:text="*{totalNetto}"></span></p>
+            <p>Viso PVM: <span th:text="*{totalVat}"></span></p>
+            <p>Viso kaina su PVM: <span th:text="*{totalBrutto}"></span></p>
+        </div>
+        <a th:href="@{/invoice}">Rodyti saskaitas</a>
 </div>
 
 <div th:replace="fragments/main :: footer"></div>

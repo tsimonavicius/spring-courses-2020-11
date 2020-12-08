@@ -32,7 +32,7 @@
                 <th><span>Orderis</span></th>
             </tr>
             <tr th:each="invoice : ${invoicePage}">
-                <td th:text="*{invoice.fullName}" />
+                <td><a th:href="@{/invoice/{id}(id=${invoice.id})}"><span th:text="${invoice.fullName}"></span></a></td>
                 <td th:text="*{invoice.createdAt}" />
                 <td><a th:href="@{/order/{id}(id=${invoice.order.id})}">Rodyti uzsakyma</a></td>
             </tr>
