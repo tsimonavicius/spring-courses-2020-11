@@ -50,6 +50,8 @@ public class CartController {
     public String checkout(SessionStatus sessionStatus, RedirectAttributes redirectAttributes, @ModelAttribute("cart") List<Product> cart) {
         redirectAttributes.addFlashAttribute("cartProducts", cart);
         redirectAttributes.addFlashAttribute("loggedInUser", ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+        redirectAttributes.addFlashAttribute("cartPrice", cartService.countTotalPrice(cart));
+
         sessionStatus.setComplete(); // killing session
         return "redirect:/order";
     }
