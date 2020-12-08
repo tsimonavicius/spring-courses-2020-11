@@ -43,4 +43,8 @@ public class UserService {
         existingUser.setPhone(newUser.getZip());
         userRepository.save(existingUser);
     }
+
+    public User findUserByUserName(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

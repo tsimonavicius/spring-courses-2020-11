@@ -9,7 +9,7 @@
 <body>
 <div th:replace="fragments/main :: menu"></div>
 <div class="container">
-    <div th:if="${!cart.empty}" class="m-2" th:include="fragments/main :: toolbar (url='/cart/checkout', text='Apmokejimas')"></div>
+    <div th:if="${!cart.empty}" class="m-2" th:include="fragments/main :: toolbar (url='/cart/checkout', text='Pirkti')"></div>
 
     <th:block th:if="${cart.empty}">
         <p>Jūsų pirkiniu krepselis yra tuscias! Parduotuveje yra <span th:text="${totalProductsInStore}"></span> produktu! Nejaugi neissirenkat? :o </p>

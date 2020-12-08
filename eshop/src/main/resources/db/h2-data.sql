@@ -16,3 +16,6 @@ INSERT INTO PRODUCTS (product_name, in_stock, price, description) VALUES
   ('Kremukas14', 20, 19.99, 'Kremukas odai sausint'),
   ('Kremukas plaukam', 22, 24.99, 'Kremukas plaukams sviestint'),
   ('Plauku balzamas', 30, 4.99, 'Balzamas plaukams');
+
+INSERT INTO USER (avatar, password, phone, username, zip) VALUES
+  ('profile.jpg', 'test', '860939222', 'tadas', 'LT-11111');

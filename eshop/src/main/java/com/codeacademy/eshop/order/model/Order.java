@@ -28,6 +28,4 @@ public class Order {
     @NotNull
     @ManyToOne
     private User user;
-
-    private String note;
 }

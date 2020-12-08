@@ -1,5 +1,6 @@
 package com.codeacademy.eshop.invoice.model;
 
+import com.codeacademy.eshop.config.Company;
 import com.codeacademy.eshop.order.model.Order;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +30,8 @@ public class Invoice {
 
     @NotNull
     private BigDecimal totalVat;
+
+    @Embedded
+    private Company company;
+
 }
