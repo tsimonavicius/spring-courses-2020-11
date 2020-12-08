@@ -3,10 +3,13 @@ package com.codeacademy.eshop.cart.controller;
 import com.codeacademy.eshop.cart.service.CartService;
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +47,10 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public String checkout(SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
-        return "redirect:/cart";
+    public String checkout(SessionStatus sessionStatus, RedirectAttributes redirectAttributes, @ModelAttribute("cart") List<Product> cart) {
+        redirectAttributes.addFlashAttribute("cartProducts", cart);
+        redirectAttributes.addFlashAttribute("loggedInUser", ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+        sessionStatus.setComplete(); // killing session
+        return "redirect:/order";
     }
 }
