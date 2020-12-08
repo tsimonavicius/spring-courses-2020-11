@@ -19,6 +19,12 @@
       <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}">
         <a class="nav-link" href="/user">Vartotojai</a>
       </li>
+      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/invoice' ? 'active':''}">
+        <a class="nav-link" href="/invoice">Saskaitos</a>
+      </li>
+      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/order' ? 'active':''}">
+        <a class="nav-link" href="/order">Atlikti uzsakymai</a>
+      </li>
     </ul>
     <span class="navbar-text">
       Sveikas atvykes, Dėstytojau!

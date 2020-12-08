@@ -2,8 +2,9 @@ package com.codeacademy.eshop.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
@@ -12,18 +13,28 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @Embeddable
 @Configuration
-@ConfigurationProperties(prefix = "company")
+@PropertySource("classpath:company.properties")
 public class Company {
     @NotBlank
-    private String companyName;
+    @Value("${name}")
+    private String name;
 
-    private long companyNo;
+    @Value("${number}")
+    private long number;
 
-    private Long companyVat;
+    @Value("${vat}")
+    private Long vat;
 
     @NotBlank
+    @Value("${iban}")
     private String iban;
 
     @NotBlank
+    @Value("${address}")
     private String address;
+
+    @NotBlank
+    @Value("${sequence.name}")
+    private String sequenceName;
+
 }

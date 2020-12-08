@@ -53,6 +53,6 @@ public class CartController {
         redirectAttributes.addFlashAttribute("cartPrice", cartService.countTotalPrice(cart));
 
         sessionStatus.setComplete(); // killing session
-        return "redirect:/order";
+        return "redirect:/order/preview";
     }
 }

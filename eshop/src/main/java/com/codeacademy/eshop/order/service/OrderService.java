@@ -1,13 +1,14 @@
 package com.codeacademy.eshop.order.service;
 
-import com.codeacademy.eshop.cart.service.CartService;
-import com.codeacademy.eshop.config.Company;
+import com.codeacademy.eshop.cart.model.CartPrice;
 import com.codeacademy.eshop.invoice.service.InvoiceService;
 import com.codeacademy.eshop.order.model.Order;
 import com.codeacademy.eshop.order.repository.OrderRepository;
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.user.model.User;
 import com.codeacademy.eshop.user.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,17 +27,35 @@ public class OrderService {
         this.invoiceService = invoiceService;
     }
 
+    /**
+     * Creates the order by the given name. This function also generates an invoice and returns its ID,
+     */
     @Transactional
-    public void placeOrder(String userName, List<Product> cartProducts) {
+    public long placeOrder(String userName, List<Product> cartProducts) {
         Order createdOrder = createNewOrder(userName, cartProducts);
-        invoiceService.createInvoice(createdOrder);
+        return invoiceService.createInvoice(createdOrder);
     }
 
+    /**
+     * Creates the order by the given card products and user name.
+     */
     private Order createNewOrder(String userName, List<Product> cartProducts) {
         User currentUser = userService.findUserByUserName(userName);
         Order order = new Order();
         order.setUser(currentUser);
         order.setProducts(cartProducts);
         return orderRepository.save(order);
+    }
+
+    public CartPrice getOrderPrice(long id) {
+        return invoiceService.getPriceByOrderId(id);
+    }
+
+    public Page<Order> getAllOrders(Pageable pageable) {
+        return orderRepository.findAll(pageable);
+    }
+
+    public Order getOrderById(long id) {
+        return orderRepository.getOne(id);
     }
 }

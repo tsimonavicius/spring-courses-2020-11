@@ -1,13 +1,16 @@
 package com.codeacademy.eshop.invoice.model;
 
+import com.codeacademy.eshop.cart.model.CartPrice;
 import com.codeacademy.eshop.config.Company;
 import com.codeacademy.eshop.order.model.Order;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,16 +25,18 @@ public class Invoice {
     @ManyToOne
     private Order order;
 
-    @NotNull
-    private BigDecimal totalNetto;
-
-    @NotNull
-    private BigDecimal totalBrutto;
-
-    @NotNull
-    private BigDecimal totalVat;
+    @Embedded
+    private CartPrice prices;
 
     @Embedded
     private Company company;
+
+    private long sequenceNo;
+
+    @NotBlank
+    private String fullName; // ESH-0001
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
