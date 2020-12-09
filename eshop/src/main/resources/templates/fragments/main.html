@@ -26,9 +26,12 @@
         <a class="nav-link" href="/order">Atlikti uzsakymai</a>
       </li>
     </ul>
-    <span class="navbar-text">
-      Sveikas atvykes, Dėstytojau!
-    </span>
+      <form class="inline-form" th:action="@{/atsijungti}" method="post">
+        <span class="navbar-text">
+          Sveikas atvykes, Dėstytojau!
+        </span>
+          <button class="btn" type="submit" th:text="#{logout}">Logout</button>
+      </form>
   </div>
 </nav>
 

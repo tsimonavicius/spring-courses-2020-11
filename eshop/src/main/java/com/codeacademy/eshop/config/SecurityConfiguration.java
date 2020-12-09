@@ -24,8 +24,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/prisijungimas")
                     .usernameParameter("user")
                     .passwordParameter("pass")
-                    .defaultSuccessUrl("/product")
-                    .failureUrl("/prisijungimas?error");
+                    .defaultSuccessUrl("/user")
+                    .failureUrl("/prisijungimas?error")
+                    .and()
+                .logout()
+                    .logoutUrl("/atsijungti");
 
         http.csrf().ignoringAntMatchers("/h2/**");
         http.headers().frameOptions().sameOrigin();
