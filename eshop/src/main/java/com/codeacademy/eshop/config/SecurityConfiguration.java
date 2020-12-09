@@ -12,7 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/h2/**").permitAll()
+                    .antMatchers("/h2/**", "/prisijungimas").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
