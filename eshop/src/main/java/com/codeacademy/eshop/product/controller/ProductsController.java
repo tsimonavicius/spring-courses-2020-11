@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/public/product")
 public class ProductsController {
 
     private ProductService productService;
