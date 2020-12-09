@@ -22,9 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .usernameParameter("user")
                     .passwordParameter("pass")
                     .defaultSuccessUrl("/product")
-                    .failureUrl("/prisijungimas?error")
-                    .and()
-                .httpBasic();
+                    .failureUrl("/prisijungimas?error");
 
         http.csrf().ignoringAntMatchers("/h2/**");
         http.headers().frameOptions().sameOrigin();
