@@ -10,14 +10,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/product' ? 'active':''}">
-        <a class="nav-link" href="/product">Produktai</a>
+      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().contains('/product') ? 'active':''}">
+        <a class="nav-link" href="/public/product">Produktai</a>
       </li>
       <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/cart' ? 'active':''}">
         <a class="nav-link" href="/cart">Krepselis  <th:block th:if="${cart != null}">(<span th:text="${cart.size()}"></span>)</th:block></a>
       </li>
-      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}">
-        <a class="nav-link" href="/user">Vartotojai</a>
+      <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().contains('/user')  ? 'active':''}">
+        <a class="nav-link" href="/private/user">Vartotojai</a>
       </li>
       <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/invoice' ? 'active':''}">
         <a class="nav-link" href="/invoice">Saskaitos</a>
