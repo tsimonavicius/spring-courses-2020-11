@@ -17,5 +17,15 @@ INSERT INTO PRODUCTS (product_name, in_stock, price, description) VALUES
   ('Kremukas plaukam', 22, 24.99, 'Kremukas plaukams sviestint'),
   ('Plauku balzamas', 30, 4.99, 'Balzamas plaukams');
 
-INSERT INTO USER (avatar, password, phone, username, zip) VALUES
-  ('profile.jpg', 'test', '860939222', 'tadas', 'LT-11111');
+INSERT INTO USER (id, avatar, password, phone, username, zip) VALUES
+  (1, 'profile.jpg', '{bcrypt}$2y$12$fQ32bokGVwHwn8PvC7Q/ROZEEMKuX97epHJlva10Px/ABEPWd2due', '860939222', 'user', 'LT-11111'),
+  (2, 'profile.jpg', '{bcrypt}$2y$12$zroYgqeBBP1CE9aVnVw7bed4FIzjeiIbWO8PY9N3aGi4it12v5KQq', '11111', 'admin', 'LT-22222');
+
+INSERT INTO ROLE (id, role_name) VALUES
+    (1, 'USER'),
+    (2, 'ADMIN');
+
+INSERT INTO USER_ROLES (user_id, role_id) VALUES
+    (1, 1),
+    (2, 2),
+    (2, 1);

@@ -1,5 +1,6 @@
 package com.codeacademy.eshop.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -45,14 +51,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("{bcrypt}$2a$10$IgO.t36FA2.M15EMK2l7EuN3cdiRRvYOHmhQqH8ELnCjf7FUhZiy.")
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password(encoder().encode("admin"))
-                .roles("ADMIN");
+
+        // JDBC user storage
+        auth.jdbcAuthentication()
+                .passwordEncoder(encoder())
+                .dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, TRUE as enabled FROM User WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT u.username, r.role_name FROM Role r " +
+                        " JOIN User_roles ur ON r.id = ur.role_id " +
+                        " JOIN User u ON u.id = ur.user_id " +
+                        " WHERE u.username = ?");
+
+        // In memory user storage
+        //        auth.inMemoryAuthentication()
+//                .withUser("user")
+//                .password("{bcrypt}$2a$10$IgO.t36FA2.M15EMK2l7EuN3cdiRRvYOHmhQqH8ELnCjf7FUhZiy.")
+//                .roles("USER")
+//                .and()
+//                .withUser("admin")
+//                .password(encoder().encode("admin"))
+//                .roles("ADMIN");
     }
 
     @Bean
