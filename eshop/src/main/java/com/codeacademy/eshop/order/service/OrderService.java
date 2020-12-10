@@ -40,7 +40,7 @@ public class OrderService {
      * Creates the order by the given card products and user name.
      */
     private Order createNewOrder(String userName, List<Product> cartProducts) {
-        User currentUser = userService.findUserByUserName(userName);
+        User currentUser = userService.loadUserByUsername(userName);
         Order order = new Order();
         order.setUser(currentUser);
         order.setProducts(cartProducts);
