@@ -15,7 +15,7 @@
 </ul>
 
 <h3>Pridėti naują produktą</h3>
-    <form th:action="@{/product}" method="POST" th:object="${product}">
+    <form th:action="@{/public/product}" method="POST" th:object="${product}">
         <label>Pavadinimas:</label>
         <input type="text" th:field="*{name}" /><br/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="hasError"></span><br />

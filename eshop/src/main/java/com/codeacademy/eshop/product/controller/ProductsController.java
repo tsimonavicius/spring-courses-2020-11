@@ -5,6 +5,8 @@ import com.codeacademy.eshop.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +46,7 @@ public class ProductsController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getNewProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "product/new-product";
@@ -62,6 +65,7 @@ public class ProductsController {
     }
 
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
         log.info("addProduct({})", product);
 
@@ -70,7 +74,7 @@ public class ProductsController {
         }
 
         long savedProductId = productService.addProduct(product).getId();
-        return "redirect:/product/" + savedProductId;
+        return "redirect:/public/product/" + savedProductId;
     }
 
     @GetMapping("/delete/{id}")
