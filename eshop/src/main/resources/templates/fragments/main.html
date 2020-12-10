@@ -38,7 +38,9 @@
   </div>
 </nav>
 
-<div th:fragment="toolbar (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}" class="container d-flex justify-content-end">
+<div th:fragment="toolbar (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}"
+     sec:authorize="hasRole('ADMIN')"
+     class="container d-flex justify-content-end">
     <a th:href="*{url}"><button class="btn btn-bg bg-success text-white" th:text="*{text}"></button></a>
 </div>
 

@@ -9,7 +9,7 @@
 <body>
 <div th:replace="fragments/main :: menu"></div>
 <div class="container">
-    <div th:replace="fragments/main :: toolbar (url='/product/new', text='Pridėti naują')"></div>
+    <div th:replace="fragments/main :: toolbar (url='/public/product/new', text='Pridėti naują')"></div>
     <th:block th:if="${cart != null}">
         <p>Pridetu produktu i krepseli: <span th:text="${cart.size()}"></span></p>
     </th:block>
