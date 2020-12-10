@@ -61,5 +61,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/prisijungimas").setViewName("user/login");
+        registry.addRedirectViewController("/", "/public/product");
     }
 }
