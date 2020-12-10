@@ -29,9 +29,11 @@
     </ul>
       <form class="inline-form" th:action="@{/atsijungti}" method="post">
         <span class="navbar-text">
-            Sveikas atvykes, <span sec:authentication="name">UserName</span>
+            Sveikas atvykes,
+            <span sec:authorize="isAuthenticated()" th:text="${#authentication.name}">UserName</span>
+            <span sec:authorize="!isAuthenticated()" th:text="Svety">Guest</span>
         </span>
-          <button class="btn" type="submit" th:text="#{logout}">Logout</button>
+          <button class="btn" type="submit" sec:authorize="isAuthenticated()" th:text="#{logout}">Logout</button>
       </form>
   </div>
 </nav>
