@@ -2,11 +2,15 @@ package com.codeacademy.eshop.product.controller;
 
 import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
+import com.codeacademy.eshop.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -47,7 +52,9 @@ public class ProductsController {
 
     @GetMapping("/new")
     @PreAuthorize("hasRole('ADMIN')")
-    public String getNewProductForm(Model model) {
+    public String getNewProductForm(Model model, Principal principal, Authentication authentication, @AuthenticationPrincipal User user) {
+        SecurityContextHolder.getContext().getAuthentication();
+
         model.addAttribute("product", new Product());
         return "product/new-product";
     }
