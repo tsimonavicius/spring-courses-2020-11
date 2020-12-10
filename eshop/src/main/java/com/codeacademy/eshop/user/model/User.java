@@ -40,7 +40,7 @@ public class User implements UserDetails {
 
     private String avatar;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="User_Roles",
             joinColumns = { @JoinColumn(name = "user_id") },
