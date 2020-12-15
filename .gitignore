@@ -2,3 +2,4 @@
 HELP.md
 eshop.iml
 target/
+.docker/
