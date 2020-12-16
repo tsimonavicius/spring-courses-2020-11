@@ -10,7 +10,7 @@
 </head>
 <body>
 <div th:replace="fragments/main :: menu"></div>
-<div th:replace="fragments/main :: toolbar (url='/user/new', text='Pridėti naują vartotoją')"></div>
+<div th:replace="fragments/main :: toolbar (url='/private/user/new', text='Pridėti naują vartotoją')"></div>
 <div class="container">
     <th:block th:if="${usersPage.empty}">
         <p>Jūs neturite pridėtų vartotoju!</p>

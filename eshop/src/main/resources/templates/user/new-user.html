@@ -9,10 +9,10 @@
 </head>
 <body>
 <div th:replace="fragments/main :: menu"></div>
-<div th:replace="fragments/main :: toolbar (url='/user', text='Atgal į vartotojų sąrašą')"></div>
+<div th:replace="fragments/main :: toolbar (url='/private/user', text='Atgal į vartotojų sąrašą')"></div>
 
 <h3>Pridėti naują vartotoja</h3>
-    <form th:action="@{/user}" method="POST" th:object="${user}">
+    <form th:action="@{/private/user}" method="POST" th:object="${user}">
         <label>Slapyvardis:</label>
         <input type="text" th:field="*{username}" /><br/>
         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="hasError"></span><br />

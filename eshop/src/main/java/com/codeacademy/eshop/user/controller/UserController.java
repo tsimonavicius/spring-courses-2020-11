@@ -42,7 +42,7 @@ public class UserController {
             return "user/new-user";
         }
         userService.addUser(user);
-        return "redirect:/user";
+        return "redirect:/private/user";
     }
 
     @GetMapping("/{id}")
@@ -64,7 +64,7 @@ public class UserController {
             return "user/edit-user";
         }
         userService.updateUser(id, user);
-        return "redirect:/user/" + id;
+        return "redirect:/private/user/" + id;
     }
 
 }

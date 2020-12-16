@@ -32,6 +32,9 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
 
+    @Transient
+    private String repeatedPassword;
+
     @LithuanianPhone
     private String phone;
 
