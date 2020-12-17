@@ -18,7 +18,9 @@ public class InvoiceService {
     private Company company;
     private CartService cartService;
 
-    public InvoiceService(InvoiceRepository invoiceRepository, Company company, CartService cartService) {
+    public InvoiceService(InvoiceRepository invoiceRepository,
+                          Company company,
+                          CartService cartService) {
         this.invoiceRepository = invoiceRepository;
         this.company = company;
         this.cartService = cartService;

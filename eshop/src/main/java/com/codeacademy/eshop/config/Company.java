@@ -1,7 +1,6 @@
 package com.codeacademy.eshop.config;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -11,6 +10,9 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 @Configuration
 @PropertySource("classpath:company.properties")
