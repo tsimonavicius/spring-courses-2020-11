@@ -3,8 +3,7 @@ package com.codeacademy.eshop.invoice.model;
 import com.codeacademy.eshop.cart.model.CartPrice;
 import com.codeacademy.eshop.config.Company;
 import com.codeacademy.eshop.order.model.Order;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,6 +13,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Invoice {
 
