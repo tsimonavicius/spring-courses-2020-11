@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.sql.DataSource;
@@ -41,5 +42,21 @@ class ProductsControllerShould {
             .andExpect(view().name("product/product-list"))
             .andExpect(model().attribute("productsPage", Page.empty()))
             .andExpect(content().string(containsString("<p>Jūs neturite pridėtų produktų!</p>")));
+    }
+
+    @Test
+    @WithMockUser(roles = {"USER"})
+    void not_allow_to_create_new_product_for_user_role() throws Exception {
+        // when
+        mvc.perform(get("/public/product/new"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void allow_to_create_new_product_for_admin_role() throws Exception {
+        // when
+        mvc.perform(get("/public/product/new"))
+                .andExpect(status().isOk());
     }
 }
