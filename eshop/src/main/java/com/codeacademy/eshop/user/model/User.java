@@ -4,6 +4,7 @@ import com.codeacademy.eshop.user.service.validator.LithuanianPhone;
 import com.codeacademy.eshop.user.service.validator.LithuanianZip;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,7 +46,8 @@ public class User implements UserDetails {
 
     private String avatar;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     @JoinTable(
             name="User_Roles",
             joinColumns = { @JoinColumn(name = "user_id") },
