@@ -4,8 +4,10 @@ import com.codeacademy.eshop.product.model.Product;
 import com.codeacademy.eshop.product.service.ProductService;
 import com.codeacademy.eshop.user.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -33,6 +35,18 @@ public class ProductsController {
 
     public ProductsController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping(value = "/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Product> getAllProductsAsJson() {
+        return productService.getAllProducts(PageRequest.of(0, 10)).getContent();
+    }
+
+    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
+    @ResponseBody
+    public List<Product> getAllProductsAsXml() {
+        return productService.getAllProducts(PageRequest.of(0, 10)).getContent();
     }
 
     @GetMapping
