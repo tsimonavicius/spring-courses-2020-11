@@ -2,8 +2,7 @@ package com.codeacademy.eshop.user.model;
 
 import com.codeacademy.eshop.user.service.validator.LithuanianPhone;
 import com.codeacademy.eshop.user.service.validator.LithuanianZip;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -19,6 +18,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User implements UserDetails {
 
     @Id

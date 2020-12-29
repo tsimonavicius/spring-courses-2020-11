@@ -72,7 +72,7 @@ public class ProductsController {
     }
 
     @PostMapping
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
         log.info("addProduct({})", product);
 
