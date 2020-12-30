@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import MyAwesomeComponent from "./components/MyAwesomeComponent";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <p>
           Hello, Tadai!
         </p>
+        <MyAwesomeComponent/>
         <a
           className="App-link"
           href="https://reactjs.org"
