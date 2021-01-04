@@ -5,6 +5,7 @@ import UncontrolledComponent from "./components/UncontrolledComponent";
 import ControlledComponent from "./components/ControlledComponent";
 import ControlledComponentWithHooks from "./components/ControlledComponentWithHooks";
 import LifecycleComponent from "./components/LifecycleComponent";
+import UncontrolledComponentHooks from "./components/UncontrolledComponentHooks";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         {/*<Counter tekstas="Niekas nepaspausta" />*/}
         {/*<HelloWorld/>*/}
         {/*<UncontrolledComponent />*/}
+        {/*<UncontrolledComponentHooks />*/}
         {/*<ControlledComponent />*/}
         <ControlledComponent />
     </div>
