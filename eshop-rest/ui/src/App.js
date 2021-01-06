@@ -6,6 +6,7 @@ import ControlledComponent from "./components/ControlledComponent";
 import ControlledComponentWithHooks from "./components/ControlledComponentWithHooks";
 import LifecycleComponent from "./components/LifecycleComponent";
 import UncontrolledComponentHooks from "./components/UncontrolledComponentHooks";
+import ProductForm from "./components/ProductForm";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         {/*<UncontrolledComponentHooks />*/}
         {/*<ControlledComponent />*/}
         <ControlledComponent />
+        <hr/>
+        <ProductForm />
     </div>
   );
 }
