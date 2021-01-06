@@ -27,8 +27,8 @@ export default () => {
 		<Formik
 			initialValues={{
 				name: '',
-				inStock: null,
-				price: null,
+				inStock: '',
+				price: '',
 				description: ''
 			}}
 			onSubmit={(values, formikHelpers) => {
