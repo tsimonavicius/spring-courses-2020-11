@@ -6,7 +6,7 @@ export default () => {
 	const [errors, setErrors] = useState({})
 
 	const setProductName = (e) => {
-		setErrors({})
+		setErrors({...errors, name: ''})
 		setProduct(prevProduct => ({
 			...prevProduct,
 			name: e.target.value
@@ -14,6 +14,7 @@ export default () => {
 	}
 
 	const setProductInStock = (e) => {
+		setErrors({...errors, inStock: ''})
 		setProduct(prevProduct => ({
 			...prevProduct,
 			inStock: e.target.value
@@ -33,8 +34,14 @@ export default () => {
 	}
 
 	const validateInStock = (e) => {
-		if (!e.target.value) {
+		if (e.target.value === '' || e.target.value === undefined) {
 			setErrors({...errors, inStock: 'Producto "Kiekis" yra privalomas'})
+			return
+		}
+
+		if (!/^-?\d+$/.test(e.target.value)) {
+			setErrors({...errors, inStock: 'Producto "Kiekis" privalo buti sveikas skaicius'})
+			return
 		}
 	}
 
