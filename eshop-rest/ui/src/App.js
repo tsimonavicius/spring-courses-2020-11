@@ -7,6 +7,7 @@ import ControlledComponentWithHooks from "./components/ControlledComponentWithHo
 import LifecycleComponent from "./components/LifecycleComponent";
 import UncontrolledComponentHooks from "./components/UncontrolledComponentHooks";
 import ProductForm from "./components/ProductForm";
+import ProductFormWithFormik from "./components/ProductFormWithFormik";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <ControlledComponent />
         <hr/>
         <ProductForm />
+        <hr/>
+        <ProductFormWithFormik/>
     </div>
   );
 }
