@@ -1,5 +1,26 @@
 import {Form, Formik, Field, ErrorMessage} from "formik"
-import PropsState from "./PropsState";
+import PropsState from "./PropsState"
+import * as Yup from "yup"
+
+const validationSchema = Yup.object().shape({
+	name: Yup.string()
+		.max(20, 'Name privalo buti trumpesnis nei 20')
+		.required(),
+	inStock: Yup.number()
+		.integer('In stock privalo buti sveikas skaicius')
+		.positive()
+		.required(),
+	price: Yup.number()
+		.positive()
+		.required()
+		.test("is-price", "Turi buti validi kaina", (value) => {
+			if (value !== '') {
+				return (value + "").match(/^\d+(\.\d{1,2})?$/)
+			}
+
+			return true
+		})
+})
 
 export default () => {
 	return (
@@ -18,7 +39,8 @@ export default () => {
 					alert(JSON.stringify(values))
 					formikHelpers.setSubmitting(false)
 				}, 1000)
-			}}>
+			}}
+			validationSchema={validationSchema}>
 			{(props) => (
 				<>
 					<PropsState {...props} />
