@@ -6,7 +6,7 @@ import About from "../../pages/About/About";
 export default () => (
 	<main className="container">
 		<Switch>
-			<Route path="/">
+			<Route exact path="/">
 				<LandingPage/>
 			</Route>
 			<Route path="/products">
