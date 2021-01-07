@@ -1,4 +1,7 @@
 import {Switch, Route} from "react-router-dom"
+import LandingPage from "../../pages/LandingPage/LandingPage";
+import Products from "../../pages/Products/Products";
+import About from "../../pages/About/About";
 
 export default () => (
 	<main className="container">
