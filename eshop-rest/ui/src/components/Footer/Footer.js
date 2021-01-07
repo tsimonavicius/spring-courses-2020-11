@@ -1,4 +1,7 @@
+import './Footer.css'
 
 export default () => (
-	<footer>Footer</footer>
+	<div className="container">
+		<footer className="footer text-muted">E-Shop&copy; 2021</footer>
+	</div>
 )
