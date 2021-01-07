@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/products")
 @Api(tags = "This controller is responsible for product interactions :))")
 public class ProductController {
 
