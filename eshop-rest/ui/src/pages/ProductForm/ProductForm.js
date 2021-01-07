@@ -1,5 +1,5 @@
 import {Form, Formik, Field, ErrorMessage} from "formik"
-import PropsState from "./PropsState"
+import PropsState from "../../components/PropsState"
 import * as Yup from "yup"
 
 const validationSchema = Yup.object().shape({
