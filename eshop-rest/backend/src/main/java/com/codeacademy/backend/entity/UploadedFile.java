@@ -21,7 +21,7 @@ public class UploadedFile {
     private String originalName;
 
     @Column(nullable = false)
-    private UUID name;
+    private String uniqueName;
 
     @Column(nullable = false)
     private String type;

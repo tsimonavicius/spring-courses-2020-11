@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -50,9 +51,9 @@ public class FileService {
 
     public UploadedFile uploadFile(MultipartFile file) {
         String fileName = validateFile(file);
-        UUID uniqueName = UUID.randomUUID();
+        String uniqueName = UUID.randomUUID().toString();
 
-        Path targetLocation = this.storageLocation.resolve(uniqueName.toString());
+        Path targetLocation = this.storageLocation.resolve(fileName);
         try {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             return createUploadedFileEntity(uniqueName, fileName, file);
@@ -62,9 +63,9 @@ public class FileService {
         }
     }
 
-    private UploadedFile createUploadedFileEntity(UUID uniqueName, String fileName, MultipartFile file) {
+    private UploadedFile createUploadedFileEntity(String uniqueName, String fileName, MultipartFile file) {
         UploadedFile uploadedFile = new UploadedFile();
-        uploadedFile.setName(uniqueName);
+        uploadedFile.setUniqueName(uniqueName);
         uploadedFile.setOriginalName(fileName);
         uploadedFile.setSize(file.getSize());
         uploadedFile.setType(file.getContentType());
@@ -90,6 +91,9 @@ public class FileService {
     }
 
     public Resource getFile(String fileName) {
+//        UploadedFile uploadedFile = uploadedFileRepository.getByUniqueName(fileName)
+//                .orElseThrow(() -> new FileNotFoundException("File was not found!"));
+
         Path fileLocation = storageLocation.resolve(fileName);
         try {
             Resource storedFile = new UrlResource(fileLocation.toUri());
