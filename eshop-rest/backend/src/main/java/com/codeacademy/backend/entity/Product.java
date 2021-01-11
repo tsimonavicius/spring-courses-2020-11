@@ -5,28 +5,32 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-public class UploadedFile {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String originalName;
+    private String name;
 
     @Column(nullable = false)
-    private String uniqueName;
+    private String description;
 
     @Column(nullable = false)
-    private String type;
+    private Integer inStock;
 
     @Column(nullable = false)
-    private Long size;
+    private BigDecimal price;
+
+//    @ManyToOne
+//    private UploadedFile uploadedFile;
 
     @CreationTimestamp
     private LocalDateTime createdAt = LocalDateTime.now();
