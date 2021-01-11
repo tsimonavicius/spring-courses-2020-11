@@ -1,5 +1,6 @@
 package com.codeacademy.backend.controller;
 
+import com.codeacademy.backend.entity.UploadedFile;
 import com.codeacademy.backend.service.FileService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -26,7 +27,7 @@ public class FileController {
     }
 
     @PostMapping
-    private String uploadFile(@RequestParam("document") MultipartFile file) {
+    private UploadedFile uploadFile(@RequestParam("document") MultipartFile file) {
         return fileService.uploadFile(file);
     }
 
