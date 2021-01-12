@@ -4,12 +4,11 @@ import com.codeacademy.backend.controller.dto.ProductDTO;
 import com.codeacademy.backend.entity.Product;
 import com.codeacademy.backend.repository.ProductRepository;
 import com.codeacademy.backend.service.exception.EntityNotFoundException;
-import com.codeacademy.backend.service.exception.ProductMapper;
+import com.codeacademy.backend.entity.mapper.ProductMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
