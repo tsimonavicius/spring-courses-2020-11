@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 
-export default (props) => {
+function ProductTable(props) {
 
     const { products, handleDeleteClick } = props;
 
@@ -34,3 +35,18 @@ export default (props) => {
         </table>
     )
 }
+
+ProductTable.propTypes = {
+    products: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            inStock: PropTypes.number.isRequired,
+            price: PropTypes.number.isRequired,
+        })
+    ).isRequired,
+    handleDeleteClick: PropTypes.func.isRequired,
+}
+
+export default ProductTable;
