@@ -1,20 +1,36 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {fetchProducts} from "../../api/productsApi";
+import { deleteProduct, fetchProducts } from "../../api/productsApi";
 
 export default () => {
 	const [products, setProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		fetchProducts()
-		.then(response => {
-			setProducts(response.data) // [{id: 1, description: "aaa" ... }, {id: 2, name: "" ....}]
-		}).finally(() => {
-			setIsLoading(false);
-		})
-
+		loadAllProducts();
 	}, [])
+
+	const loadAllProducts = () => {
+		setIsLoading(true);
+		fetchProducts()
+			.then(response => {
+				setProducts(response.data) // [{id: 1, description: "aaa" ... }, {id: 2, name: "" ....}]
+			})
+			.finally(() => {
+				setIsLoading(false);
+			})
+	}
+
+	const handleDeleteClick = (id) => {
+		setIsLoading(true);
+		deleteProduct(id)
+			.then(() => {
+				loadAllProducts();
+			})
+			.finally(() => {
+				setIsLoading(false);
+			})
+	}
 
 	return (
 		<>
@@ -33,6 +49,7 @@ export default () => {
 								<th>Description</th>
 								<th>In Stock</th>
 								<th>Price</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,6 +61,9 @@ export default () => {
 									<td>{p.description}</td>
 									<td>{p.inStock}</td>
 									<td>{p.price}</td>
+									<th>
+										<button onClick={() => handleDeleteClick(p.id)}>Delete product</button>
+									</th>
 								</tr>
 							))
 						}
