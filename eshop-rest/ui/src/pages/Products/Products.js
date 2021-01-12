@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import { deleteProduct, fetchProducts } from "../../api/productsApi";
 import ProductsTable from "./ProductsTable";
+import Button from "@material-ui/core/Button";
 
 export default () => {
 	const [products, setProducts] = useState([])
@@ -36,6 +37,9 @@ export default () => {
 	return (
 		<>
 			<h1>Products Page!</h1>
+			<Link to="/products/new">
+				<Button type="button" variant="contained" color="primary">Sukurti produkta</Button>
+			</Link>
 			{
 				isLoading ?
 					(
@@ -48,9 +52,6 @@ export default () => {
 					/>
 
 			}
-			<Link to="/products/new">
-				<button type="button" className="btn btn-primary">Sukurti produkta</button>
-			</Link>
 		</>
 	)
 }
