@@ -1,6 +1,8 @@
 import {Form, Formik, Field, ErrorMessage} from "formik"
-import PropsState from "../../components/PropsState"
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup"
+import { addProduct } from "../../api/productsApi";
+
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string()
@@ -17,12 +19,24 @@ const validationSchema = Yup.object().shape({
 			if (value !== '') {
 				return (value + "").match(/^\d+(\.\d{1,2})?$/)
 			}
-
 			return true
 		})
 })
 
 export default () => {
+	const history = useHistory();
+
+	const handleOnSubmit = (formValues, formikHelpers) => {
+		formikHelpers.setSubmitting(true);
+		addProduct(formValues)
+			.then(() => {
+				history.push("/products");
+			})
+			.finally(() => {
+				formikHelpers.setSubmitting(false);
+			})
+	}
+
 	return (
 		<Formik
 			initialValues={{
@@ -31,19 +45,11 @@ export default () => {
 				price: '',
 				description: ''
 			}}
-			onSubmit={(values, formikHelpers) => {
-				console.log("values", values)
-				console.log("formikHelpers", formikHelpers)
-
-				setTimeout(() => {
-					alert(JSON.stringify(values))
-					formikHelpers.setSubmitting(false)
-				}, 1000)
-			}}
+			onSubmit={handleOnSubmit}
 			validationSchema={validationSchema}>
 			{(props) => (
 				<>
-					<PropsState {...props} />
+
 					<Form className="mx-4">
 						<div className="form-group">
 							<label htmlFor="name">Name:</label>
