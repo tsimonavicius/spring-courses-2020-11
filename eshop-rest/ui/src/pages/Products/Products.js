@@ -7,11 +7,12 @@ export default () => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		setTimeout(() => fetchProducts().then(response => {
-			setProducts(response.data)
-			setIsLoading(false)
-			console.log('response', response)
-		}), 2000)
+		fetchProducts()
+		.then(response => {
+			setProducts(response.data) // [{id: 1, description: "aaa" ... }, {id: 2, name: "" ....}]
+		}).finally(() => {
+			setIsLoading(false);
+		})
 
 	}, [])
 
@@ -24,7 +25,30 @@ export default () => {
 						<div className="spinner-border" role="status">
 						</div>
 					) :
-					<h2>{JSON.stringify(products)}</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product name</th>
+								<th>Description</th>
+								<th>In Stock</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+						{
+							products.map(p => (
+								<tr key={p.id}>
+									<td>{p.id}</td>
+									<td>{p.name}</td>
+									<td>{p.description}</td>
+									<td>{p.inStock}</td>
+									<td>{p.price}</td>
+								</tr>
+							))
+						}
+						</tbody>
+					</table>
 			}
 			<Link to="/products/new">
 				<button type="button" className="btn btn-primary">Sukurti produkta</button>
