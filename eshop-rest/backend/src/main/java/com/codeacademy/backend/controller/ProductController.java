@@ -29,9 +29,8 @@ public class ProductController {
     }
 
     @GetMapping
-    private List<ProductDTO> getAllProduct(@PathVariable long id) {
-        return new ArrayList<>(); // TODO implement
-//        return productService.getProductById(id);
+    private List<ProductDTO> getAllProducts() {
+        return productService.getAllProducts();
     }
 
     @PostMapping

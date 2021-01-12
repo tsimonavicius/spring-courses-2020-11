@@ -21,6 +21,13 @@ public class ExceptionHandlers {
         // TODO: would be smart to log here...
         return new ErrorResponse(exception.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ErrorResponse handleEntityNotFoundException(EntityNotFoundException exception) {
+        // TODO: would be smart to log here...
+        return new ErrorResponse(exception.getMessage());
+    }
 }
 
 
