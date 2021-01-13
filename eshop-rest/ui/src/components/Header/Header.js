@@ -1,5 +1,6 @@
-import {AppBar, CssBaseline, makeStyles, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Badge, CssBaseline, IconButton, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -60,6 +61,12 @@ export default () => {
 					<nav>
 						<NavLink className={classes.link} to="/products">Produktai</NavLink>
 						<NavLink className={classes.link} to="/about">Apie sistema</NavLink>
+
+						<IconButton aria-label="cart">
+							<Badge badgeContent={1} color="primary">
+								<ShoppingCartIcon />
+							</Badge>
+						</IconButton>
 					</nav>
 				</Toolbar>
 			</AppBar>
