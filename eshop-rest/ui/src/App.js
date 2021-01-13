@@ -7,7 +7,7 @@ import React, {useState} from "react";
 const CartContext = React.createContext(null)
 
 function App() {
-	const [products, setProducts] = useState([{}, {}])
+	const [products, setProducts] = useState([])
 
 	const cartContextState = {
 		products,
