@@ -3,6 +3,7 @@ import LandingPage from "../../pages/LandingPage/LandingPage";
 import Products from "../../pages/Products/Products";
 import About from "../../pages/About/About";
 import ProductForm from "../../pages/ProductForm/ProductForm";
+import Cart from "../../pages/Cart/Cart";
 
 export default () => (
 	<main className="container">
@@ -18,6 +19,9 @@ export default () => (
 			</Route>
 			<Route path="/about">
 				<About/>
+			</Route>
+			<Route path="/cart">
+				<Cart/>
 			</Route>
 		</Switch>
 	</main>
