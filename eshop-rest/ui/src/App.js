@@ -26,5 +26,5 @@ function App() {
 	);
 }
 
-export { CartContext }
+export {CartContext}
 export default App;

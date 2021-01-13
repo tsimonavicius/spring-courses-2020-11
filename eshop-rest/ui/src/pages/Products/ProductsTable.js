@@ -2,13 +2,16 @@ import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
-import React from "react";
+import React, {useContext} from "react";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
+import {CartContext} from "../../App";
 
 function ProductTable(props) {
+
+    const { addProduct } = useContext(CartContext)
 
     const { products, handleDeleteClick } = props;
 
@@ -22,6 +25,7 @@ function ProductTable(props) {
                         <TableCell align="center">Description</TableCell>
                         <TableCell align="center">In Stock</TableCell>
                         <TableCell align="center">Price</TableCell>
+                        <TableCell align="center"/>
                         <TableCell align="center"/>
                     </TableRow>
                 </TableHead>
@@ -38,9 +42,21 @@ function ProductTable(props) {
                                     <Button
                                         variant="outlined"
                                         color="secondary"
-                                        size={"small"}
+                                        size="small"
                                         onClick={() => handleDeleteClick(p.id)}
                                     >Delete</Button>
+                                </TableCell>
+                                <TableCell>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="small"
+                                        onClick={() => addProduct({
+                                            id: p.id,
+                                            name: p.name,
+                                            price: p.price
+                                        })}
+                                    >Add</Button>
                                 </TableCell>
                             </TableRow>
                         ))
