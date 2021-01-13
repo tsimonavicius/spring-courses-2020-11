@@ -1,5 +1,5 @@
 import {AppBar, Badge, CssBaseline, IconButton, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link as RouterLink} from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useContext} from "react";
 import {CartContext} from "../../App";
@@ -65,11 +65,13 @@ export default () => {
 						<Link className={classes.link} component={NavLink} to="/products">Produktai</Link>
 						<Link className={classes.link} component={NavLink} to="/about">Apie sistema</Link>
 
-						<IconButton aria-label="cart">
-							<Badge badgeContent={products.length} color="primary">
-								<ShoppingCartIcon />
-							</Badge>
-						</IconButton>
+						<RouterLink to="/cart">
+							<IconButton aria-label="cart">
+								<Badge badgeContent={products.length} color="primary">
+									<ShoppingCartIcon />
+								</Badge>
+							</IconButton>
+						</RouterLink>
 					</nav>
 				</Toolbar>
 			</AppBar>
