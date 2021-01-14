@@ -6,8 +6,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Button from "@material-ui/core/Button";
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {removeProduct} from "../../store/slices/cartSlice";
 
 export default () => {
+
+	const products = useSelector(state => state.cart)
+	const dispatch = useDispatch()
 
 	return (
 		<TableContainer>
@@ -22,7 +27,7 @@ export default () => {
 				</TableHead>
 				<TableBody>
 					{
-						[].map((p, i) => (
+						products.map((p, i) => (
 							<TableRow key={p.id}>
 								<TableCell>{i + 1}</TableCell>
 								<TableCell>{p.name}</TableCell>
@@ -32,7 +37,7 @@ export default () => {
 										variant="contained"
 										color="secondary"
 										size="small"
-										onClick={() => null}
+										onClick={() => dispatch(removeProduct(p.id))}
 									>Remove</Button>
 								</TableCell>
 							</TableRow>
