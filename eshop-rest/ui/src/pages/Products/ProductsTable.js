@@ -7,10 +7,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
+import {connect} from "react-redux";
+import {addProduct} from "../../store/slices/cartSlice";
 
-function ProductTable(props) {
-
-    const { products, handleDeleteClick } = props;
+function ProductTable({ products, handleDeleteClick, addProduct }) {
 
     return (
         <TableContainer>
@@ -48,7 +48,7 @@ function ProductTable(props) {
                                         variant="contained"
                                         color="primary"
                                         size="small"
-                                        onClick={() => ({
+                                        onClick={() => addProduct({
                                             id: p.id,
                                             name: p.name,
                                             price: p.price
@@ -75,6 +75,11 @@ ProductTable.propTypes = {
         })
     ).isRequired,
     handleDeleteClick: PropTypes.func.isRequired,
+    addProduct: PropTypes.func
 }
 
-export default ProductTable;
+const mapDispatchToProps = {
+    addProduct
+}
+
+export default connect(null, mapDispatchToProps)(ProductTable);
