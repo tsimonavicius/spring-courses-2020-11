@@ -4,7 +4,7 @@ import { deleteProduct, fetchProducts } from "../../api/productsApi";
 import ProductsTable from "./ProductsTable";
 import Button from "@material-ui/core/Button";
 
-export default () => {
+const Products = () => {
 	const [products, setProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 
@@ -55,3 +55,7 @@ export default () => {
 		</>
 	)
 }
+
+Products.displayName = "Products"
+
+export default Products
