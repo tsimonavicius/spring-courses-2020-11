@@ -6,10 +6,10 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addProduct(state, { product }) {
+		addProduct(state, { payload: product }) {
 			state.push(product)
 		},
-		removeProduct(state, { id }) {
+		removeProduct(state, { payload: id }) {
 			return state.filter(product => product.id !== id)
 		}
 	}
