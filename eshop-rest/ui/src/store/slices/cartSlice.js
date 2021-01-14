@@ -6,11 +6,11 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addProduct(state, action) {
-			state.push(action.product)
+		addProduct(state, { product }) {
+			state.push(product)
 		},
-		removeProduct(state, action) {
-			return state.filter(product => product.id !== action.id)
+		removeProduct(state, { id }) {
+			return state.filter(product => product.id !== id)
 		}
 	}
 })
