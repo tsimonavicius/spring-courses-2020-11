@@ -1,8 +1,6 @@
 import {AppBar, Badge, CssBaseline, IconButton, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {NavLink, Link as RouterLink} from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import {useContext} from "react";
-import {CartContext} from "../../App";
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -51,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
 	const classes = useStyles()
-	const { products } = useContext(CartContext)
 
 	return (
 		<>
@@ -67,7 +64,7 @@ export default () => {
 
 						<RouterLink to="/cart">
 							<IconButton aria-label="cart">
-								<Badge badgeContent={products.length} color="primary">
+								<Badge badgeContent={0} color="primary">
 									<ShoppingCartIcon />
 								</Badge>
 							</IconButton>

@@ -5,12 +5,9 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Button from "@material-ui/core/Button";
-import React, {useContext} from "react";
-import {CartContext} from "../../App";
+import React from "react";
 
 export default () => {
-
-	const { products, removeProduct } = useContext(CartContext)
 
 	return (
 		<TableContainer>
@@ -25,7 +22,7 @@ export default () => {
 				</TableHead>
 				<TableBody>
 					{
-						products.map((p, i) => (
+						[].map((p, i) => (
 							<TableRow key={p.id}>
 								<TableCell>{i + 1}</TableCell>
 								<TableCell>{p.name}</TableCell>
@@ -35,7 +32,7 @@ export default () => {
 										variant="contained"
 										color="secondary"
 										size="small"
-										onClick={() => removeProduct(p.id)}
+										onClick={() => null}
 									>Remove</Button>
 								</TableCell>
 							</TableRow>
