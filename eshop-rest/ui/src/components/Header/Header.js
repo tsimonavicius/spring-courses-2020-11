@@ -2,6 +2,7 @@ import {AppBar, Badge, CssBaseline, IconButton, Link, makeStyles, Toolbar, Typog
 import {NavLink, Link as RouterLink} from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {connect} from "react-redux";
+import LangSwitcher from "./LangSwitcher";
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -70,6 +71,7 @@ const Header = ({ productCount }) => {
 								</Badge>
 							</IconButton>
 						</RouterLink>
+						<LangSwitcher />
 					</nav>
 				</Toolbar>
 			</AppBar>
