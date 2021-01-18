@@ -9,6 +9,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import {connect} from "react-redux";
 import {addProduct} from "../../store/slices/cartSlice";
+import {Link} from "react-router-dom";
 
 function ProductTable({ products, handleDeleteClick, addProduct }) {
 
@@ -31,7 +32,7 @@ function ProductTable({ products, handleDeleteClick, addProduct }) {
                         products.map(p => (
                             <TableRow key={p.id}>
                                 <TableCell>{p.id}</TableCell>
-                                <TableCell>{p.name}</TableCell>
+                                <TableCell><Link to={`/products/${p.id}`}>{p.name}</Link></TableCell>
                                 <TableCell>{p.description}</TableCell>
                                 <TableCell>{p.inStock}</TableCell>
                                 <TableCell>{p.price}</TableCell>

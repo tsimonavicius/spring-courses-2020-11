@@ -5,6 +5,7 @@ import About from "../../pages/About/About";
 import ProductForm from "../../pages/ProductForm/ProductForm";
 import Cart from "../../pages/Cart/Cart";
 import NotFound from "../../pages/NotFound/NotFound";
+import SingleProduct from "../../pages/Products/SingleProduct";
 
 export default () => (
 	<main className="container">
@@ -14,6 +15,9 @@ export default () => (
 			</Route>
 			<Route path="/products/new">
 				<ProductForm/>
+			</Route>
+			<Route path="/products/:id">
+				<SingleProduct />
 			</Route>
 			<Route path="/products">
 				<Products/>

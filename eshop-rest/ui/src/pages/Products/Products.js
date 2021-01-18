@@ -4,6 +4,7 @@ import { deleteProduct, fetchProducts } from "../../api/productsApi";
 import ProductsTable from "./ProductsTable";
 import { useTranslation } from "react-i18next";
 import Button from "@material-ui/core/Button";
+import Loader from "../common/Loader";
 
 const Products = () => {
 	const [products, setProducts] = useState([])
@@ -43,11 +44,7 @@ const Products = () => {
 				<Button type="button" variant="contained" color="primary">Sukurti produkta</Button>
 			</Link>
 			{
-				isLoading ?
-					(
-						<div className="spinner-border" role="status">
-						</div>
-					) :
+				isLoading ? (<Loader />) :
 					<ProductsTable
 						products={products}
 						handleDeleteClick={handleDeleteClick}
