@@ -28,6 +28,11 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
+    @PatchMapping("/{id}")
+    private ProductDTO updateProductDescription(@PathVariable long id, @RequestBody ProductDTO productDTO) {
+        return productService.updateProductDescription(id, productDTO);
+    }
+
     @GetMapping
     private List<ProductDTO> getAllProducts() {
         return productService.getAllProducts();

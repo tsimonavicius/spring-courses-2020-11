@@ -64,4 +64,11 @@ public class ProductService {
         return productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
     }
+
+    public ProductDTO updateProductDescription(long id, ProductDTO productDTO) {
+        Product product = getById(id);
+        product.setDescription(productDTO.getDescription());
+        Product updatedProduct = productRepository.save(product);
+        return productMapper.convertProductToDTO(updatedProduct);
+    }
 }
