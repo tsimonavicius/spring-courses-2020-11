@@ -1,6 +1,8 @@
 package com.money.paymentsystem.order.dto;
 
-import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
