@@ -2,7 +2,7 @@ package com.codeacademy.backend.service;
 
 import com.codeacademy.backend.controller.dto.ProductDTO;
 import com.codeacademy.backend.entity.Product;
-import com.codeacademy.backend.http.PaymentSystemApi;
+import com.codeacademy.backend.http.payment.PaymentSystemApi;
 import com.codeacademy.backend.repository.ProductRepository;
 import com.codeacademy.backend.service.exception.EntityNotFoundException;
 import com.codeacademy.backend.entity.mapper.ProductMapper;

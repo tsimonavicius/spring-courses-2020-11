@@ -1,7 +1,7 @@
 package com.codeacademy.backend.service;
 
-import com.codeacademy.backend.http.PaymentSystemApi;
-import com.codeacademy.backend.http.dto.PaymentSystemOverviewDTO;
+import com.codeacademy.backend.http.payment.PaymentSystemApi;
+import com.codeacademy.backend.http.payment.dto.PaymentSystemOverviewDTO;
 import org.springframework.stereotype.Service;
 
 @Service

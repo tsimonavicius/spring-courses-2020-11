@@ -1,6 +1,6 @@
 package com.codeacademy.backend.controller;
 
-import com.codeacademy.backend.http.dto.PaymentSystemOverviewDTO;
+import com.codeacademy.backend.http.payment.dto.PaymentSystemOverviewDTO;
 import com.codeacademy.backend.service.PaymentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
