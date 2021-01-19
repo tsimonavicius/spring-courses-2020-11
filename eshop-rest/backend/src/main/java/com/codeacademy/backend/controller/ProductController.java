@@ -3,13 +3,11 @@ package com.codeacademy.backend.controller;
 import com.codeacademy.backend.controller.dto.ProductDTO;
 import com.codeacademy.backend.service.ProductService;
 import io.swagger.annotations.Api;
-import org.apache.catalina.connector.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,14 +26,14 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-    @PatchMapping("/{id}")
-    private ProductDTO updateProductDescription(@PathVariable long id, @RequestBody ProductDTO productDTO) {
-        return productService.updateProductDescription(id, productDTO);
-    }
-
     @GetMapping
     private List<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @PatchMapping("/{id}")
+    private ProductDTO updateProductDescription(@PathVariable long id, @RequestBody ProductDTO productDTO) {
+        return productService.updateProductDescription(id, productDTO);
     }
 
     @PostMapping

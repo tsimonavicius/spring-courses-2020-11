@@ -1,11 +1,10 @@
 package com.money.paymentsystem.order;
 
+import com.money.paymentsystem.order.dto.AddOrderRequest;
 import com.money.paymentsystem.order.dto.OrderOverviewDTO;
-import com.sun.istack.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -19,8 +18,8 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addOrder(@RequestParam @NotNull BigDecimal price) {
-        orderService.addOrder(price);
+    public void addOrder(@RequestBody @Validated AddOrderRequest request) {
+        orderService.addOrder(request.getPrice());
     }
 
     @GetMapping

@@ -2,6 +2,7 @@ package com.codeacademy.backend.service;
 
 import com.codeacademy.backend.controller.dto.ProductDTO;
 import com.codeacademy.backend.entity.Product;
+import com.codeacademy.backend.http.PaymentSystemApi;
 import com.codeacademy.backend.repository.ProductRepository;
 import com.codeacademy.backend.service.exception.EntityNotFoundException;
 import com.codeacademy.backend.entity.mapper.ProductMapper;
@@ -16,15 +17,18 @@ public class ProductService {
 
     private ProductRepository productRepository;
     private ProductMapper productMapper;
+    private PaymentSystemApi paymentSystemApi;
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper, PaymentSystemApi paymentSystemApi) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.paymentSystemApi = paymentSystemApi;
     }
 
     public ProductDTO createProduct(ProductDTO productDTO) {
         Product product = productMapper.convertProductDtoToEntity(productDTO);
         Product savedProduct = productRepository.save(product);
+        paymentSystemApi.createOrder(productDTO.getPrice());
         productDTO.setId(savedProduct.getId());
         return productDTO;
     }
