@@ -1,8 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
-import cart from './slices/cartSlice'
+import cart, {loadCartFromStorage, subscribeToCartChanges} from './slices/cartSlice'
 import {logger} from "redux-logger";
-import {loadFromStorage, saveToStorage} from "../utils/localStorage";
-import _ from "lodash"
 
 export default (initialState) => {
 
@@ -11,14 +9,10 @@ export default (initialState) => {
 			cart
 		},
 		middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-		preloadedState: loadFromStorage('state')
+		preloadedState: {cart: loadCartFromStorage(), ...initialState}
 	})
 
-	store.subscribe(_.throttle(() => {
-		const state = store.getState()
-
-		saveToStorage('state', state)
-	}, 10000))
+	subscribeToCartChanges(store)
 
 	return store
 }
