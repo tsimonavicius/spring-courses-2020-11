@@ -1,8 +1,7 @@
 package com.codeacademy.backend.config;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,6 +15,9 @@ import com.codeacademy.backend.security.JwtProvider;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private JwtProvider jwtProvider;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -28,8 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/login").permitAll()
                     .anyRequest().authenticated()
                     .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), new JwtProvider()));
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider));
 
     }
+
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManager() throws Exception {
+//        return super.authenticationManager();
+//    }
 
 }
