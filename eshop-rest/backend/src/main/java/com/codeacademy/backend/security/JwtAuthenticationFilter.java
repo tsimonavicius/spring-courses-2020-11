@@ -1,5 +1,10 @@
 package com.codeacademy.backend.security;
 
+import static com.codeacademy.backend.security.SecurityConstants.AUTHORIZATION_HEADER;
+import static com.codeacademy.backend.security.SecurityConstants.AUTHORIZATION_HEADER_PREFIX;
+import static com.codeacademy.backend.security.SecurityConstants.PASSWORD_FIELD;
+import static com.codeacademy.backend.security.SecurityConstants.USERNAME_FIELD;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -24,8 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
+
     private JwtProvider jwtProvider;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtProvider jwtProvider) {
@@ -41,8 +45,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             Map<String, String> credentials = new ObjectMapper().readValue(request.getReader(), new TypeReference<>() {
             });
 
-            String username = credentials.get(USERNAME);
-            String password = credentials.get(PASSWORD);
+            String username = credentials.get(USERNAME_FIELD);
+            String password = credentials.get(PASSWORD_FIELD);
 
             return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (Exception e) {
@@ -57,6 +61,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String jwtToken = jwtProvider.createToken(user);
 
-        response.addHeader("Authorization", "Bearer " + jwtToken);
+        response.addHeader(AUTHORIZATION_HEADER, AUTHORIZATION_HEADER_PREFIX + jwtToken);
     }
 }
