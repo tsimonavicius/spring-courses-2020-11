@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 import com.codeacademy.backend.security.JwtAuthenticationFilter;
+import com.codeacademy.backend.security.JwtAuthorizationFilter;
 import com.codeacademy.backend.security.JwtProvider;
 
 /**
@@ -30,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/login").permitAll()
                     .anyRequest().authenticated()
                     .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider));
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtProvider));
 
     }
 
