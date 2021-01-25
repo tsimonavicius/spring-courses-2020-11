@@ -22,22 +22,22 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    private ProductDTO getProduct(@PathVariable long id) {
+    public ProductDTO getProduct(@PathVariable long id) {
         return productService.getProductById(id);
     }
 
     @GetMapping
-    private List<ProductDTO> getAllProducts() {
+    public List<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @PatchMapping("/{id}")
-    private ProductDTO updateProductDescription(@PathVariable long id, @RequestBody ProductDTO productDTO) {
+    public ProductDTO updateProductDescription(@PathVariable long id, @RequestBody ProductDTO productDTO) {
         return productService.updateProductDescription(id, productDTO);
     }
 
     @PostMapping
-    private ResponseEntity<ProductDTO> addProduct(@RequestBody @Valid ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody @Valid ProductDTO productDTO) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(productService.createProduct(productDTO));
@@ -45,13 +45,13 @@ public class ProductController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    private ProductDTO updateProduct(@RequestBody @Valid ProductDTO productDTO) {
+    public ProductDTO updateProduct(@RequestBody @Valid ProductDTO productDTO) {
         return productService.updateProduct(productDTO);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void deleteProduct(@PathVariable long id) {
+    public void deleteProduct(@PathVariable long id) {
         productService.deleteProduct(id);
     }
 
