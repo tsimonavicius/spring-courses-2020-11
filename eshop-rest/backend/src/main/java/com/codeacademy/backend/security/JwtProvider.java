@@ -1,14 +1,20 @@
 package com.codeacademy.backend.security;
 
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -38,12 +44,30 @@ public class JwtProvider {
                 .setSubject(user.getUsername())
                 .setExpiration(new Date(now.getTime() + validityInMillis))
                 .claim("roles", user.getAuthorities().stream()
-                                        .map(GrantedAuthority::getAuthority)
-                                        .collect(Collectors.toList()))
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()))
                 .compact();
     }
 
     public Authentication getAuthentication(String jwt) {
+
+        // parse and validate JWT
+        Jwt<?, Claims> parsedJwt = Jwts.parserBuilder()
+                .setSigningKey(secret) // for checking signature validity
+                .build()
+                .parseClaimsJwt(jwt);
+
+        String username = parsedJwt.getBody().getSubject();
+
+        List<GrantedAuthority> roles = ((List<String>) parsedJwt.getBody().get("roles")).stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+
+        // create Authentication
+        if (StringUtils.isNotEmpty(username)) {
+            return new UsernamePasswordAuthenticationToken(username, roles);
+        }
+
         return null;
     }
 }
