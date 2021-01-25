@@ -65,7 +65,7 @@ public class JwtProvider {
 
         // create Authentication
         if (StringUtils.isNotEmpty(username)) {
-            return new UsernamePasswordAuthenticationToken(username, roles);
+            return new UsernamePasswordAuthenticationToken(username, null, roles);
         }
 
         return null;
