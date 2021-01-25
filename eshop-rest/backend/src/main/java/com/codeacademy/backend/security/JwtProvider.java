@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -52,10 +52,10 @@ public class JwtProvider {
     public Authentication getAuthentication(String jwt) {
 
         // parse and validate JWT
-        Jwt<?, Claims> parsedJwt = Jwts.parserBuilder()
+        Jws<Claims> parsedJwt = Jwts.parserBuilder()
                 .setSigningKey(secret) // for checking signature validity
                 .build()
-                .parseClaimsJwt(jwt);
+                .parseClaimsJws(jwt);
 
         String username = parsedJwt.getBody().getSubject();
 
