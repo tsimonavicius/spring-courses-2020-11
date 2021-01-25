@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
@@ -36,6 +37,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if (isNotEmpty(authorizationHeader) && authorizationHeader.startsWith(AUTHORIZATION_HEADER_PREFIX)) {
             String jwt = authorizationHeader.replace(AUTHORIZATION_HEADER_PREFIX, "");
             Authentication authentication = jwtProvider.getAuthentication(jwt);
+
+            if (authentication == null) {
+                chain.doFilter(request, response);
+                return;
+            }
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            chain.doFilter(request, response);
         }
     }
 }
