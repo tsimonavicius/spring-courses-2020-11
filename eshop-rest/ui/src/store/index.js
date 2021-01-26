@@ -3,7 +3,7 @@ import cart, {loadCartFromStorage, subscribeToCartChanges} from './slices/cartSl
 import {logger} from "redux-logger";
 import user from './slices/userSlice'
 
-export default (initialState) => {
+export const createStore = (initialState) => {
 
 	const store = configureStore({
 		reducer: {
@@ -18,3 +18,5 @@ export default (initialState) => {
 
 	return store
 }
+
+export default createStore()
