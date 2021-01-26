@@ -63,6 +63,7 @@ const Header = ({ productCount }) => {
 					<nav>
 						<Link className={classes.link} component={NavLink} to="/products">Produktai</Link>
 						<Link className={classes.link} component={NavLink} to="/about">Apie sistema</Link>
+						<Link className={classes.link} component={NavLink} to="/login">Prisijungti</Link>
 
 						<RouterLink to="/cart">
 							<IconButton aria-label="cart">
