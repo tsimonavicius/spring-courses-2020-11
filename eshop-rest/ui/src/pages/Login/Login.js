@@ -2,15 +2,23 @@ import {Form, Formik, Field} from "formik"
 import PropsState from "../../components/PropsState";
 import {login} from "../../api/usersApi";
 import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setJwt, setUserData} from "../../store/slices/userSlice";
 
 export default () => {
 	const history = useHistory()
+	const dispatch = useDispatch()
 
 	const postLogin = (loginData, { setSubmitting }) => {
 		setSubmitting(true)
 
 		login(loginData)
-			.then(() => history.push('/'))
+			.then(({data, headers: { authorization }}) => {
+				dispatch(setUserData(data))
+				dispatch(setJwt(authorization))
+
+				history.push('/')
+			})
 			.finally(() => setSubmitting(false))
 	}
 
