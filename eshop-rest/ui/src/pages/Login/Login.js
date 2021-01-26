@@ -1,22 +1,43 @@
-import {Form, Formik, Field, ErrorMessage} from "formik"
+import {Form, Formik, Field} from "formik"
+import PropsState from "../../components/PropsState";
+import {login} from "../../api/usersApi";
+import {useHistory} from "react-router-dom";
 
 export default () => {
+	const history = useHistory()
+
+	const postLogin = (loginData, { setSubmitting }) => {
+		setSubmitting(true)
+
+		login(loginData)
+			.then(() => history.push('/'))
+			.finally(() => setSubmitting(false))
+	}
 
 	return (
-		<Formik>
+		<Formik
+			initialValues={{
+				username: '',
+				password: ''
+			}}
+			onSubmit={postLogin}
+		>
 			{(props) => (
-				<Form>
-					<div className="form-group">
-						<label htmlFor="username">Username:</label>
-						<Field name="username" id="username" className="form-control" placeholder="Please enter your username" />
-					</div>
-					<div className="form-group">
-						<label htmlFor="password">Password:</label>
-						<Field name="password" id="password" className="form-control" placeholder="Please enter your password" />
-					</div>
+				<>
+					<PropsState {...props} />
+					<Form>
+						<div className="form-group">
+							<label htmlFor="username">Username:</label>
+							<Field name="username" id="username" className="form-control" placeholder="Please enter your username" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="password">Password:</label>
+							<Field name="password" id="password" type="password" className="form-control" placeholder="Please enter your password" />
+						</div>
 
-					<button type="submit" className="btn btn-primary mt-2">Login</button>
-				</Form>
+						<button type="submit" className="btn btn-primary mt-2" disabled={props.isSubmitting}>Login</button>
+					</Form>
+				</>
 			)}
 		</Formik>
 	)
