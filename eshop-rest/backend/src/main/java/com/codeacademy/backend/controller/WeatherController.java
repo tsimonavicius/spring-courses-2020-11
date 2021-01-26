@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/weather")
+@RequestMapping("/weather")
 public class WeatherController {
 
     private WeatherService weatherService;
