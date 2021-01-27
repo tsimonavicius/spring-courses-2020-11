@@ -43,11 +43,11 @@ const Products = () => {
 		<>
 			<h1>{t('totalProductsDesc', { total: products.length })}</h1>
 			{
-				!!user && user.roles.includes('ADMIN') ? (
+				user?.roles.includes('ADMIN') && (
 					<Link to="/products/new">
 						<Button type="button" variant="contained" color="primary">Sukurti produkta</Button>
 					</Link>
-				) : ''
+				)
 			}
 			{
 				isLoading ? (<Loader />) :
