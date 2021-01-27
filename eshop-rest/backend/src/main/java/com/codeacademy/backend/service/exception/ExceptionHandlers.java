@@ -1,9 +1,11 @@
 package com.codeacademy.backend.service.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 @RestControllerAdvice
 public class ExceptionHandlers {
@@ -27,6 +29,12 @@ public class ExceptionHandlers {
     public ErrorResponse handleEntityNotFoundException(EntityNotFoundException exception) {
         // TODO: would be smart to log here...
         return new ErrorResponse(exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AccessDeniedException.class)
+    public ErrorResponse handleAccessDeniedException(AccessDeniedException exception) {
+        return new ErrorResponse("Not authorized.");
     }
 }
 
