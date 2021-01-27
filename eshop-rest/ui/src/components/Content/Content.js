@@ -15,9 +15,9 @@ export default () => (
 			<Route exact path="/">
 				<LandingPage/>
 			</Route>
-			<Route path="/products/new">
+			<PrivateRoute path="/products/new" roles={['ADMIN']}>
 				<ProductForm/>
-			</Route>
+			</PrivateRoute>
 			<Route path="/products/:id">
 				<SingleProduct />
 			</Route>
