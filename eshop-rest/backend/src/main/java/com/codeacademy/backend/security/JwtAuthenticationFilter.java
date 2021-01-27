@@ -19,6 +19,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.codeacademy.backend.entity.User;
@@ -31,13 +32,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private JwtProvider jwtProvider;
-    private ObjectMapper objectMapper;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,
-                                   JwtProvider jwtProvider, ObjectMapper objectMapper) {
+                                   JwtProvider jwtProvider) {
         super(authenticationManager);
         this.jwtProvider = jwtProvider;
-        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -60,10 +59,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+
         User user = (User) authResult.getPrincipal();
         String jwtToken = jwtProvider.createToken(user);
 
         response.addHeader(AUTHORIZATION_HEADER, AUTHORIZATION_HEADER_PREFIX + jwtToken);
-        objectMapper.writeValue(response.getWriter(), new UserDTO(user));
+
+        chain.doFilter(request, response);
     }
 }
