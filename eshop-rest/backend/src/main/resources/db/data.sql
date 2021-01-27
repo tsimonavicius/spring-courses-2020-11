@@ -17,9 +17,9 @@ INSERT INTO PRODUCT (name, in_stock, price, description) VALUES
 ('Kremukas plaukam', 22, 24.99, 'Kremukas plaukams sviestint'),
 ('Plauku balzamas', 30, 4.99, 'Balzamas plaukams');
 
-INSERT INTO USER (id, password, username) VALUES
-  (1, '{bcrypt}$2y$12$6C5T4j7HlR8CaokuYbtvMuKU5GAHJxVmq7v9oQonieq5jTAtEiRuG', 'user'),
-  (2, '{bcrypt}$2y$12$6C5T4j7HlR8CaokuYbtvMuKU5GAHJxVmq7v9oQonieq5jTAtEiRuG', 'admin');
+INSERT INTO USER (id, password, username, name, lastname) VALUES
+  (1, '{bcrypt}$2y$12$6C5T4j7HlR8CaokuYbtvMuKU5GAHJxVmq7v9oQonieq5jTAtEiRuG', 'user', 'Vardenis', 'Pavardenis'),
+  (2, '{bcrypt}$2y$12$6C5T4j7HlR8CaokuYbtvMuKU5GAHJxVmq7v9oQonieq5jTAtEiRuG', 'admin', 'Adminas', 'Adminauskas');
 
 INSERT INTO ROLE (id, role_name) VALUES
     (1, 'USER'),
