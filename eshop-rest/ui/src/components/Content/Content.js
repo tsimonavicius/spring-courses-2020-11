@@ -7,6 +7,7 @@ import Cart from "../../pages/Cart/Cart";
 import NotFound from "../../pages/NotFound/NotFound";
 import SingleProduct from "../../pages/Products/SingleProduct";
 import Login from "../../pages/Login/Login";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export default () => (
 	<main className="container">
@@ -26,9 +27,9 @@ export default () => (
 			<Route path="/about">
 				<About/>
 			</Route>
-			<Route path="/cart">
+			<PrivateRoute path="/cart">
 				<Cart/>
-			</Route>
+			</PrivateRoute>
 			<Route>
 				<Login/>
 			</Route>
