@@ -1,7 +1,7 @@
 import {AppBar, Badge, CssBaseline, IconButton, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {NavLink, Link as RouterLink} from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import LangSwitcher from "./LangSwitcher";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,8 +49,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Header = ({ productCount }) => {
+const Header = () => {
 	const classes = useStyles()
+	const productCount = useSelector(state => state.cart.length)
 
 	return (
 		<>
@@ -80,8 +81,4 @@ const Header = ({ productCount }) => {
 	)
 }
 
-const mapStateToProps = ({ cart }) => ({
-	productCount: cart.length
-})
-
-export default connect(mapStateToProps, null)(Header)
+export default Header
