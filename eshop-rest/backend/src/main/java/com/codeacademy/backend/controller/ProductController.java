@@ -5,6 +5,7 @@ import com.codeacademy.backend.service.ProductService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,6 +38,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody @Valid ProductDTO productDTO) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
