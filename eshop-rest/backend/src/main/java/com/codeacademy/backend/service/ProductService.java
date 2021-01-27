@@ -28,7 +28,7 @@ public class ProductService {
     public ProductDTO createProduct(ProductDTO productDTO) {
         Product product = productMapper.convertProductDtoToEntity(productDTO);
         Product savedProduct = productRepository.save(product);
-        paymentSystemApi.createOrder(productDTO.getPrice());
+//        paymentSystemApi.createOrder(productDTO.getPrice());
         productDTO.setId(savedProduct.getId());
         return productDTO;
     }
