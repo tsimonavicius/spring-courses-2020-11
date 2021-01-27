@@ -1,8 +1,10 @@
-import {AppBar, Badge, CssBaseline, IconButton, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Badge, CssBaseline, IconButton, Link, makeStyles, Toolbar, Typography, Button} from "@material-ui/core";
 import {NavLink, Link as RouterLink} from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LangSwitcher from "./LangSwitcher";
+import {removeJwt, removeUserData} from "../../store/slices/userSlice";
+import useUser from "../../hooks/useUser";
 
 const useStyles = makeStyles((theme) => ({
 	'@global': {
@@ -52,6 +54,13 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
 	const classes = useStyles()
 	const productCount = useSelector(state => state.cart.length)
+	const user = useUser()
+	const dispatch = useDispatch()
+
+	const logout = () => {
+		dispatch(removeJwt())
+		dispatch(removeUserData())
+	}
 
 	return (
 		<>
@@ -64,8 +73,16 @@ const Header = () => {
 					<nav>
 						<Link className={classes.link} component={NavLink} to="/products">Produktai</Link>
 						<Link className={classes.link} component={NavLink} to="/about">Apie sistema</Link>
-						<Link className={classes.link} component={NavLink} to="/login">Prisijungti</Link>
-
+						{
+							!!user ? (
+								<>
+									<span>{`${user.name} ${user.lastname}`}</span>
+									<Link className={classes.link} component={Button} onClick={logout}>Atsijungti</Link>
+								</>
+							) : (
+								<Link className={classes.link} component={NavLink} to="/login">Prisijungti</Link>
+							)
+						}
 						<RouterLink to="/cart">
 							<IconButton aria-label="cart">
 								<Badge badgeContent={productCount} color="primary">

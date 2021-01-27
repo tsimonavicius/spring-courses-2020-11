@@ -14,9 +14,15 @@ const userSlice = createSlice({
 		},
 		setJwt(state, { payload: jwt }) {
 			state.jwt = jwt
+		},
+		removeUserData(state) {
+			state.userData = null
+		},
+		removeJwt(state) {
+			state.jwt = null
 		}
 	}
 })
 
 export default userSlice.reducer
-export const { setUserData, setJwt } = userSlice.actions
+export const { setUserData, setJwt, removeUserData, removeJwt } = userSlice.actions
